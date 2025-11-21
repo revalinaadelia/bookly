@@ -52,8 +52,8 @@ Aplikasi ini mengikuti filosofi Filament yaitu "Make the common things easy, and
 
 ### 3. Relasi Database
 
-1. One-to-Many: Author -> Books
-2. Many-to-Many: Books -> Categories
+1. One-to-Many: Author -> Books.
+2. Many-to-Many: Books -> Categories.
 3. Select input relasional dengan fitur searchable & preload.
 
 ### 4. Fitur Filtering & Searching
