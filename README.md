@@ -216,7 +216,7 @@ Aplikasi dan perangkat berikut harus sudah terpasang pada komputer:
 
 #### a. Migration (Penambahan Kolom Description)
 
-`database/migrations/xxxx_create_books_table.php`
+File: `database/migrations/xxxx_create_books_table.php`
 
 Kode berikut menambahkan kolom description bertipe text yang dapat bernilai null:
 
@@ -224,9 +224,9 @@ Kode berikut menambahkan kolom description bertipe text yang dapat bernilai null
 
 Kolom ini menjadi penyimpanan utama untuk ringkasan buku. 
 
-#### b. Model (Menambah Description ke `$fillable`
+#### b. Model (Menambah Description ke `$fillable`)
 
-`app/Models/Book.php`
+File: `app/Models/Book.php`
 
 ```php
 protected $fillable = [
@@ -243,9 +243,9 @@ protected $fillable = [
 
 Menaruh `description` di `$fillable` memungkinkan Laravel melakukan mass assignment dari form Filament.
 
-#### c. Resource (Menambahkan Textarea pada Form Book
+#### c. Resource (Menambahkan Textarea pada Form Book)
 
-`app/Filament/Resources/BookResource.php`
+File: `app/Filament/Resources/BookResource.php`
 
 Kode berikut menambahkan komponen input deskripsi pada form:
 
@@ -260,7 +260,7 @@ Textarea ditampilkan dalam section "Book Information" sehingga pengguna dapat me
 
 #### d. Factory (Generate Description Dummy)
 
-`database/factories/BookFactory.php`
+File: `database/factories/BookFactory.php`
 
 `'description' => fake()->paragraph(3, true),`
 
@@ -270,15 +270,15 @@ Saat melakukan seeding, setiap buku otomatis memiliki deskripsi realistis. Ini j
 
 #### a. Migration (Menambah Kolom Role)
 
-`database/migrations/xxxx_create_users_table.php`
+File: `database/migrations/xxxx_create_users_table.php`
 
 `$table->enum('role', ['admin', 'staff', 'viewer'])->default('viewer');`
 
 Dengan ini, setiap user memiliki role yang menentukan hak akses.
 
-#### b. Model (Menambah Role ke `$fillable`
+#### b. Model (Menambah Role ke `$fillable`)
 
-`app/Models/User.php`
+File: `app/Models/User.php`
 
 `protected $fillable = ['name', 'email', 'password', 'role'];`
 
@@ -286,7 +286,7 @@ Agar role bisa diisi saat seeding atau registrasi.
 
 #### c. Seeder (Membuat User Admin, Staff, Viewer)
 
-`database/seeders/DatabaseSeeder.php`
+File: `database/seeders/DatabaseSeeder.php`
 
 ```php
 // Admin
@@ -322,7 +322,7 @@ Tiga akun dibuat untuk pengujian RBAC:
 
 #### d. Policy (Aturan Akses pada Buku)
 
-`app/Policies/BookPolicy.php`
+File: `app/Policies/BookPolicy.php`
 
 ```php
 public function create(User $user): bool {
@@ -348,7 +348,7 @@ public function delete(User $user, Book $book): bool {
 
 #### e. Pembatasan Akses pada Table Actions
 
-`BookResource.php -> table()`
+File: `BookResource.php -> table()`
 
 ```php
 Tables\Actions\DeleteAction::make()
@@ -361,7 +361,7 @@ Tombol delete hanya muncul untuk admin.
 
 #### a. Widget Statistik
 
-`app/Filament/Widgets/LibraryStatsWidget.php`
+File: `app/Filament/Widgets/LibraryStatsWidget.php`
 
 Menampilkan:
 1. Total Books
@@ -378,7 +378,7 @@ Widget ini muncul di dashboard Filament dan sesuai dengan instruksi tugas.
 
 #### b. Widget Grafik Pie Chart
 
-`app/Filament/Widgets/BooksChart.php`
+File: `app/Filament/Widgets/BooksChart.php`
 
 ```php
 $available = Book::where('status', 'available')->count();
@@ -395,7 +395,7 @@ Menggunakan Chart.js bawaan Filament.
 
 #### a. Model Category
 
-`app/Models/Category.php`
+File: `app/Models/Category.php`
 
 ```php
 public function books() {
@@ -405,7 +405,7 @@ public function books() {
 
 #### b. Relasi pada Book
 
-`app/Models/Book.php`
+File: `app/Models/Book.php`
 
 ```php
 public function categories() {
@@ -415,9 +415,7 @@ public function categories() {
 
 #### c. Migration Category dan Pivot
 
-`xxxx_create_categories_table.php`
-
-`xxxx_create_book_category_table.php`
+File : `xxxx_create_categories_table.php` dan `xxxx_create_book_category_table.php`
 
 Kode pivot:
 
@@ -430,7 +428,7 @@ Ini memastikan relasi bersih saat sebuah buku dihapus.
 
 #### d. Form Input Categories di BookResource
 
-`BookResource.php -> form()`
+File: `BookResource.php -> form()`
 
 ```php
 Forms\Components\Select::make('categories')
@@ -444,7 +442,7 @@ Pengguna dapat memilih banyak kategori menggunakan dropdown multi-select.
 
 #### 5. Seeder Kategori
 
-`CategorySeeder.php`
+File: `CategorySeeder.php`
 
 Berisi 20 kategori bawaan.
 
@@ -452,7 +450,7 @@ Semua kategori otomatis dibuat dan siap dihubungkan ke buku.
 
 #### 6. Seeder Buku (Attach Kategori)
 
-`DatabaseSeeder.php`
+File: `DatabaseSeeder.php`
 
 ```php
 $book->categories()->attach(
