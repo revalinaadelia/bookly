@@ -212,6 +212,256 @@ Aplikasi dan perangkat berikut harus sudah terpasang pada komputer:
 ---
 ## 💻 Penjelasan Kode
 
+### 1. Penambahan Field Description pada Book
+
+#### a. Migration (Penambahan Kolom Description)
+
+`database/migrations/xxxx_create_books_table.php`
+
+Kode berikut menambahkan kolom description bertipe text yang dapat bernilai null:
+
+`$table->text('description')->nullable();`
+
+Kolom ini menjadi penyimpanan utama untuk ringkasan buku. 
+
+#### b. Model (Menambah Description ke `$fillable`
+
+`app/Models/Book.php`
+
+```php
+protected $fillable = [
+    'isbn',
+    'title',
+    'author_id',
+    'publisher',
+    'year',
+    'cover',
+    'status',
+    'description', // Tambah Ini
+];
+```
+
+Menaruh `description` di `$fillable` memungkinkan Laravel melakukan mass assignment dari form Filament.
+
+#### c. Resource (Menambahkan Textarea pada Form Book
+
+`app/Filament/Resources/BookResource.php`
+
+Kode berikut menambahkan komponen input deskripsi pada form:
+
+```php
+Forms\Components\Textarea::make('description')
+    ->label('Description')
+    ->rows(4)
+    ->columnSpanFull();
+```
+
+Textarea ditampilkan dalam section "Book Information" sehingga pengguna dapat menuliskan ringkasan buku secara lengkap.
+
+#### d. Factory (Generate Description Dummy)
+
+`database/factories/BookFactory.php`
+
+`'description' => fake()->paragraph(3, true),`
+
+Saat melakukan seeding, setiap buku otomatis memiliki deskripsi realistis. Ini juga memenuhi poin "menambah field description pada factory".
+
+### 2. Implementasi Role-Based Access
+
+#### a. Migration (Menambah Kolom Role)
+
+`database/migrations/xxxx_create_users_table.php`
+
+`$table->enum('role', ['admin', 'staff', 'viewer'])->default('viewer');`
+
+Dengan ini, setiap user memiliki role yang menentukan hak akses.
+
+#### b. Model (Menambah Role ke `$fillable`
+
+`app/Models/User.php`
+
+`protected $fillable = ['name', 'email', 'password', 'role'];`
+
+Agar role bisa diisi saat seeding atau registrasi.
+
+#### c. Seeder (Membuat User Admin, Staff, Viewer)
+
+`database/seeders/DatabaseSeeder.php`
+
+```php
+// Admin
+        User::factory()->create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => 'admin',
+            'role' => 'admin',
+            // Kalau mau pasti: 'password' => bcrypt('password'),
+        ]);
+
+        // Staff
+        User::factory()->create([
+            'name' => 'Staff User',
+            'email' => 'staff@example.com',
+            'password' => 'pwstaff',
+            'role' => 'staff',
+        ]);
+
+        // Viewer
+        User::factory()->create([
+            'name' => 'Viewer User',
+            'email' => 'viewer@example.com',
+            'password' => 'pwviewer',
+            'role' => 'viewer',
+        ]);
+```
+
+Tiga akun dibuat untuk pengujian RBAC:
+1. Admin -> akses penuh
+2. Staff -> bisa create/view
+3. Viewer -> hanya bisa view
+
+#### d. Policy (Aturan Akses pada Buku)
+
+`app/Policies/BookPolicy.php`
+
+```php
+public function create(User $user): bool {
+    return $user->role !== 'viewer';
+}
+
+public function update(User $user, Book $book): bool {
+    return $user->role !== 'viewer';
+}
+
+public function delete(User $user, Book $book): bool {
+    return $user->role === 'admin';
+}
+```
+
+**Implementasi**
+
+| Role   | View | Create | Update | Delete |
+|--------|------|--------|--------|--------|
+| Admin  | ✔    | ✔     | ✔      | ✔     |
+| Staff  | ✔    | ✔     | ✔      | ✖     |
+| Viewer | ✔    | ✖     | ✖      | ✖     |
+
+#### e. Pembatasan Akses pada Table Actions
+
+`BookResource.php -> table()`
+
+```php
+Tables\Actions\DeleteAction::make()
+    ->visible(fn () => auth()->user()?->role == 'admin'),
+```
+
+Tombol delete hanya muncul untuk admin.
+
+### 3. Widget Dashboard
+
+#### a. Widget Statistik
+
+`app/Filament/Widgets/LibraryStatsWidget.php`
+
+Menampilkan:
+1. Total Books
+2. Total Authors
+3. Available vs Borrowed
+
+```php
+stat::make('Total Books', Book::count())
+    ->description('Books in the library')
+    ->color('primary');
+```
+
+Widget ini muncul di dashboard Filament dan sesuai dengan instruksi tugas.
+
+#### b. Widget Grafik Pie Chart
+
+`app/Filament/Widgets/BooksChart.php`
+
+```php
+$available = Book::where('status', 'available')->count();
+$borrowed = Book::where('status', 'borrowed')->count();
+```
+
+Pie chart menampilkan rasio:
+1. Buku Available
+2. Buku Borrowed
+
+Menggunakan Chart.js bawaan Filament.
+
+### 4. Kategori Buku (Many-to-Many)
+
+#### a. Model Category
+
+`app/Models/Category.php`
+
+```php
+public function books() {
+    return $this->belongsToMany(Book::class);
+}
+```
+
+#### b. Relasi pada Book
+
+`app/Models/Book.php`
+
+```php
+public function categories() {
+    return $this->belongsToMany(Category::class);
+}
+```
+
+#### c. Migration Category dan Pivot
+
+`xxxx_create_categories_table.php`
+
+`xxxx_create_book_category_table.php`
+
+Kode pivot:
+
+```php
+$table->foreignId('book_id')->constrained()->cascadeOnDelete();
+$table->foreignId('category_id')->constrained()->cascadeOnDelete();
+```
+
+Ini memastikan relasi bersih saat sebuah buku dihapus.
+
+#### d. Form Input Categories di BookResource
+
+`BookResource.php -> form()`
+
+```php
+Forms\Components\Select::make('categories')
+    ->multiple()
+    ->relationship('categories', 'name')
+    ->preload()
+    ->searchable();
+```
+
+Pengguna dapat memilih banyak kategori menggunakan dropdown multi-select.
+
+#### 5. Seeder Kategori
+
+`CategorySeeder.php`
+
+Berisi 20 kategori bawaan.
+
+Semua kategori otomatis dibuat dan siap dihubungkan ke buku.
+
+#### 6. Seeder Buku (Attach Kategori)
+
+`DatabaseSeeder.php`
+
+```php
+$book->categories()->attach(
+    $categories->random(rand(1, 3))->pluck('id')->toArray()
+);
+```
+
+Setiap buku mendapat 1-3 kategori acak.
+
 ---
 ## 📈 Uji Fungsionalitas CRUD
 
