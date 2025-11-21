@@ -666,3 +666,5 @@ php artisan route:clear
 
 ---
 ## 🏁 Kesimpulan
+
+Melalui praktikum ini, aplikasi Bookly berhasil dikembangkan sebagai sistem manajemen buku berbasis web yang memanfaatkan Laravel dan Filament 3.x untuk menghadirkan admin panel yang mdoern, rapi, dane efisien. Seluruh tujuan pembelajaran tercapai, mulai dari implementasi CRUD, relasi one-to-many dan many-to-many, upload cover buku, hingga pemakaian Factory & Seeder untuk data dummy. Selain itu, penerapan Role-Based Access Control (RBAC) serta penambahan dashboard widget dan fitur kategori buku menunjukkan bahwa aplikasi tidak hanya berfungsi secara teknis, tetapi juga terstruktur dengan baik dan siap digunakan sebagai fondasi pengembangan sistem perpustakaan yang lebih kompleks di masa depan.
