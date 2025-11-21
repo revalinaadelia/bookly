@@ -103,7 +103,7 @@ Widget yang ditambahkan:
 ### 10. Admin Panel Filament
 
 1. Panel `/admin` untuk login.
-2. UI modern dan responsif powered by Fiament + Tailwind.
+2. UI modern dan responsif powered by Filament + Tailwind.
 3. Aksi cepat: Create, Eidt, Delete, Bulk Delete, View.
 
 ---
