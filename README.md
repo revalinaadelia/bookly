@@ -1,670 +1,618 @@
-# PRAKTIKUM 9: BOOKLY - APLIKASI MANAJEMEN BUKU DENGAN LARAVEL DAN FILAMENT 3.x
-
-Kustomisasi dan Pengembangan
+# PRAKTIKUM 11: PROGRES TUBES 1 - APLIKASI CAFELORA
 
 # 📃 Identitas Diri
 
-- **Nama**             : Revalina Adelia
-- **NPM**              : 4523210091
+- **Kelompok**         : Kelompok 1
+- **Anggota Kelompok** : 
+  1. Arya Wicaksana Putra (4520210092)
+  2. Aditya Nur Lintang (4523210003)
+  3. Alip Khoeril Akbar (4523210009)
+  4. Revalina Adelia (4523210091)
+  5. Chaerul Cahyadi (4523210120)
 - **Mata Kuliah**      : Pemrograman Berbasis Web (A)
 - **Dosen Pengampu**   : Adi Wahyu Pribadi, S.Si., M.Kom.
-- **Tanggal**          : 21 November 2025
+- **Topik Proyek**     : Cafe
 
 ---
-## 🎯 Tujuan Pembelajaran
+# 📋 Deskripsi Cafelora
 
-Pada praktikum ini mahasiswa mempelajari bagaimana mengembangkan aplikasi manajemen data modern dengan memanfaatkan Laravel sebagai backend dan Filament 3.x sebagai admin panel. Setelah menyelesaikan praktikum ini, mahasiswa diharapkan mampu:
-1. Memahami konsep MVC dalam Laravel.
-2. Mengimplementasikan CRUD lengkap menggunakan Filament Resource.
-3. Membangun relasi database (one-to-many & many-to-many).
-4. Membuat form, table, filter, infolist, dan UI yang dinamis.
-5. Melakukan upload file (cover buku) dengan storage management.
-6. Menggunakan Factory & Seeder untuk data dummy.
-7. Mengimplementasikan Role-Based Access Control (RBAC) dengan Policy.
-8. Membuat dashboard widget untuk statistik data.
+**Cafelora** merupakan konsep aplikasi yang dikembangkan untuk mendukung operasional sebuah cafe modern dengan fokus pada kemudahan pemesanan, kejelasan informasi menu, dan proses transaksi yang efisien. Ide awal Cafelora muncul dari kebutuhan untuk menyediakan layanan cepat dan nyaman bagi pelanggan yang ingin menikmati makanan dan minuman berkualitas. Seluruh menu diolah menggunakan bahan segar setiap hari, dan sistem pemesanan dirancang agar mudah dipahami baik oleh pelanggan maupun kasir. Pelanggan dapat melihat menu dengan lebih informatif, sementara kasir dapat memproses transaksi secara ringkas dan terstruktur. Pendekatan ini membuat alur pelayanan menjadi rapi, meminimalkan kesalahan, serta meningkatkan kepuasan pelanggan. Seiring berjalannya waktu, Cafelora terus berkembang berkat kombinasi rasa yang konsisten, harga yang bersaing, dan pengalaman pemesanan yang praktis. Aplikasi ini hadir sebagai solusi pendukung digital untuk meningkatkan kualitas layanan dan efisiensi operasional cafe.
 
 ---
-## 📰 Deskripsi Aplikasi
+# 🚀 Fitur Aplikasi Cafelora
 
-Bookly adalah aplikasi manajemen buku berbasis web yang dibangun menggunakan Laravel 12 dan Filament 3.x. Bookly dirancang sebagai aplikasi admin panel untuk mengelola data perpustakaan, mencakup:
-1. Data buku
-2. Data penulis
-3. Data kategori buku
-4. Status ketersediaan buku
-5. Statistik data dalam bentuk widget
+## Fitur Admin
 
-Aplikasi ini mengikuti filosofi Filament yaitu "Make the common things easy, and the hard things possible" yang membuat pengembangan aplikasi menjadi lebih cepat, elegan, dan efisien.
+1. CRUD menu, kategori, varian, dan topping.
+2. Upload dan manajemen gambar menu.
+3. Sistem manajemen stok otomatis.
+4. Workflow status transaksi dari awal hingga selesai.
+5. Pengelolaan user.
+6. Dashboard pendapatan serta grafik penjualan harian dan bulanan.
+7. Export laporan transaksi ke format PDF/Excel **(opsional)**.
+
+## Fitur Kasir/Staff (POS)
+
+1. Input pesanan menggunakan komponen Repeater.
+2. Penambahan topping dan modifier secara dinamis.
+3. Perhitungan total harga secara otomatis.
+4. Fitur input uang bayar dan kalkulasi kembalian.
+5. Cetak struk transaksi dalam bentuk PDF/HTML.
+6. Akses halaman yang dibatasi sesuai role (khusus transaksi).
+
+## Fitur Pelanggan (Frontend)
+
+1. Melihat daftar menu makanan dan minuman.
+2. Filter menu berdasarkan kategori dan varian.
+3. Tampilan menu berbentuk kartu untuk memudahkan pemilihan.
+4. Halaman detail menu untuk memberikan informasi lebih lengkap.
+
+## Fitur Tambahan (Opsional)
+
+1. Integrasi payment gateway (Midtrans atau Xendit).
+2. Filter laporan berdasarkan tanggal dan status transaksi.
+3. Fitur chart penjualan untuk monitoring transaksi 7 hari terakhir.
 
 ---
-## ✨ Fitur Utama
+# 👥 Pembagian Jobdesk 
 
-### 1. CRUD Lengkap untuk Buku & Penulis
+## 1. Chaerul Cahyadi (Ketua)
 
-1. Tambah, ubah, hapus, dan lihat detail buku.
-2. Tambah, edit, hapus penulis.
-3. Kolom pencarian & sorting otomatis bawaan Filament.
+1. Menyusun struktur proyek secara keseluruhan.
+2. Mengintegrasikan fitur transaksi dan perhitungan harga.
+3. Menangani dashboard serta visualisasi data laporan.
+4. Melakukan final review terhadap seluruh fitur.
 
-### 2. Upload Cover Buku
+## 2. Arya Wicaksana Putra
 
-1. Upload cover melalui FileUpload Filament.
-2. Penyimpanan file pada `storage/app/public/book-covers`.
-3. Gambar ditampilkan pada tabel & halaman detail.
+1. Mendesain ERD serta relasi antar tabel _database_.
+2. Membuat CRUD data master seperti kategori dan topping.
+3. Mengimplementasikan validasi _form_ dan upload gambar menu.
 
-### 3. Relasi Database
+## 3. Aditya Nur Lintang
 
-1. One-to-Many: Author -> Books.
-2. Many-to-Many: Books -> Categories.
-3. Select input relasional dengan fitur searchable & preload.
+1. Melakukan setup awal Laravel dan Filament.
+2. Mengimplementasikan role, Policy, dan access control.
+3. Mengelola user Admin dan Staff.
 
-### 4. Fitur Filtering & Searching
+## 4. Alip Khoeril Akbar
 
-1. Filter berdasarkan status (available/borrowed).
-2. Filter berdasarkan tahun terbit.
-3. Filter berdasarkan penulis.
-4. Searching otomatis untuk judul & ISBN.
+1. Mendesain UI untuk tampilan menu pelanggan (Frontend).
+2. Mengatur layout grid pada halaman menu.
+3. Membuat komponen kartu menu dan fitur filter.
 
-### 5. View Detail Buku (Infolist)
+## 5. Muhammad Fauzan
 
-1. Menampilkan detail buku secara rapi menggunakan Infolist.
-2. Menampilkan cover, ISBN, penulis, tahun, status, serta timestamp.
+1. Mengembangkan fitur POS kasir.
+2. Mengimplementasikan Repeater item transaksi dan kalkulasi otomatis.
+3. Membuat fitur cetak struk dalam format HTML-PDF.
+
+## 6. Revalina Adelia 
+
+1. Mengembangkan fitur laporan dan export PDF/Excel.
+2. Mengatur workflow status transaksi.
+3. Meyusun dokumentasi teknis proyek dan README.
+
+---
+## 🛠 Teknologi yang Digunakan
+
+Aplikasi ini dibangun menggunakan beberapa teknologi utama yang mendukung _backend_, _frontend_, dan _database_, sehingga aplikasi dapat berjalan dengan baik dan terstruktur. Berikut teknologi yang digunakan:
+
+| Teknologi             | Versi  | Keterangan                                                                       |
+|-----------------------|--------|----------------------------------------------------------------------------------|
+| **PHP**               | 8.4.13 | Bahasa pemrograman server-side yang menjalankan logika aplikasi                  |
+| **Laravel Framework** | ^12.0  | Framework PHP berbasis MVC untuk mengatur _routing_, controller, model, dan view |
+| **Composer**          | Latest | Dependency manager untuk mengelola library dan package PHP                       |
+| **NPM**               | Latest | Package manager untuk mengelola library dan modul JavaScript                     |
+| **Vite**              | Latest | Build tool untuk mengompilasi dan mengelola file _frontend_ (CSS, JS)            |
+| **MySQL/PostgreSQL**  | Latest | _Database_ relasional untuk menyimpan semua data aplikasi                        |
+
+---
+## ⚙️ Persyaratan Sistem
+
+Sebelum menjalankan aplikasi, pastikan perangkat sudah memenuhi persyaratan berikut:
+
+1. **PHP >= 8.2** : Versi PHP yang kompatibel dengan Laravel 12.
+2. **Composer** : Untuk mengelola _dependency_ PHP.
+3. **Node.js & NPM** : Untuk menjalankan script _frontend_ dan _build assets_.
+4. **MySQL atau PostgreSQL** : _Database_ untuk menyimpan data aplikasi.
+5. **Web Server** : Seperti Apache atau Nginx, atau bisa menggunakan Laravel _built-in server_.
+
+Untuk pengguna **Windows**, disarankan menggunakan salah satu dari:
+1. **Laragon** : Sudah termasuk PHP, MySQL, dan Apache, memudahkan setup lingkungan _development_.
+2. **XAMPP** : Paket server populer untuk PHP dan MySQL.
+3. **Herd** : Alternatif ringan untuk _development_ lokal.
+
+---
+## 🛠️ Langkah Instalasi
+
+### 1. Clone atau Download Repository
+
+```bash
+# Clone repository (jika menggunakan git)
+https://github.com/xnoname2003/cafelora.git
+cd cafelora
+```
+
+Langkah ini digunakan untuk mengambil kode sumber aplikasi dari _repository_ Git. Jika menggunakan Git, perintah `git clone` akan menyalin seluruh project ke komputer kita, kemudian `cd cafelora` masuk ke folder proyek agar siap untuk langkah selanjutnya.
+
+### 2. Install Dependencies PHP
+
+```bash
+composer install
+```
+
+Perintah ini digunakan untuk menginstal **library dan package PHP** yang dibutuhkan oleh Laravel. Semua dependensi sudah didefinisikan di file `composer.json`, sehingga aplikasi bisa berjalan dengan baik.
+
+### 3. Install Dependencies JavaScript
+
+```bash
+npm install
+```
+
+Laravel menggunakan JavaScript untuk _frontend_ (misal interaksi UI atau _build assets_). Perintah ini akan menginstal semua _package_ JavaScript yang diperlukan sesuai definisi di `package.json`.
+
+### 4. Konfigurasi Environment
+
+```bash
+# Copy file .env.example menjadi .env
+copy .env.example .env
+
+# Generate application key
+php artisan key:generate
+```
+
+1. `copy .env.example .env` : Membuat salinan file konfigurasi _environment_ agar bisa diubah sesuai pengaturan lokal.
+2. `php artisan key:generate` : Membuat **_aplication key_** yang digunakan Laravel untuk keamanan, misalnya enkripsi session dan data sensitif.
    
-### 6. Role-Based Access Control (RBAC)
+### 5. Konfigurasi Database
 
-Role ditambahkan pada tabel users:
+Edit file `.env` untuk menyesuaikan pengaturan _database_:
 
-| Role   | Hak Akses                         |
-|--------|-----------------------------------|
-| Admin  | Full akses CRUD                   |
-| Staff  | Create, Edit, View (tanpa Delete) |
-| Viewer | View only                         |
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=cafelora
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-Diimplementasikan melalui BookPolicy & AuthorPolicy
+Di sini kita menentukan tipe _database_ (MySQL), alamat server _database_, nama _database_, _username_, dan _password_. Ini agar Laravel bisa terhubung ke _database_ lokal.
 
-### 7. Dashboard Widgets
+### 6. Jalankan Migration & Seeder
 
-Widget yang ditambahkan:
-1. Total Books
-2. Total Authors
-3. Statistik jumlah buku available vs borrowed.
+```bash
+# Membuat tabel-tabel di database
+php artisan migrate
+
+# (Optional) Generate data dummy untuk testing
+php artisan db:seed
+```
+
+1. `php artisan migrate` : Membuat semua **tabel di _database_** sesuai file migration.
+2. `php artisan db:seed` : Opsional, untuk mengisi _database_ dengan **data _dummy_** agar bisa langsung dicoba tanpa menambahkan data manual.
    
-### 8. Kategori Buku (Many-to-Many)
+### 7. Build Assets Frontend
 
-1. Model `Category` dibuat.
-2. Buku dapat memiliki banyak kategori.
-3. Multiple select di form create/edit book.
+```bash
+# Untuk development (dengan hot reload)
+npm run dev
 
-### 9. Data Dummy menggunakan Factory & Seeder
-
-1. 10 data Author
-2. 50 data Book
-3. Generator otomatis menggunakan Faker
-4. Menjamin ISBN unik dan hubungan author terdistribusi acak.
-
-### 10. Admin Panel Filament
-
-1. Panel `/admin` untuk login.
-2. UI modern dan responsif powered by Filament + Tailwind.
-3. Aksi cepat: Create, Eidt, Delete, Bulk Delete, View.
-
----
-## 📂 Struktur Folder Penting
-
-```
-manajemen-buku/
-├── app
-│   ├── Filament
-│   │   ├── Resources
-│   │   │   ├── AuthorResource
-│   │   │   │   ├── Pages
-│   │   │   │   │   ├── CreateAuthor.php
-│   │   │   │   │   ├── EditAuthor.php
-│   │   │   │   │   └── ListAuthors.php
-│   │   │   │   └── AuthorResource.php
-│   │   │   ├── BookResource
-│   │   │   │   ├── Pages
-│   │   │   │   │   ├── CreateBook.php
-│   │   │   │   │   ├── EditBook.php
-│   │   │   │   │   ├── ListBooks.php
-│   │   │   │   │   └── ViewBook.php
-│   │   │   │   └── BookResource.php
-│   │   ├── Widgets
-│   │   │   ├── BooksChart.php
-│   │   │   └── LibraryStatsWidget.php
-│   ├── Http
-│   │   └── Controllers
-│   ├── Models
-│   │   ├── Author.php
-│   │   ├── Book.php
-│   │   ├── Category.php
-│   │   └── User.php
-│   ├── Policies
-│   │   ├── AuthorPolicy.php
-│   │   └── BookPolicy.php
-│   └── Providers
-│
-├── bootstrap
-├── config
-├── database
-│   ├── factories
-│   │   ├── AuthorFactory.php
-│   │   ├── BookFactory.php
-│   │   └── UserFactory.php
-│   ├── migrations
-│   │   ├── 0001_01_01_000000_create_users_table.php
-│   │   ├── 0001_01_01_000001_create_cache_table.php
-│   │   ├── 0001_01_01_000002_create_jobs_table.php
-│   │   ├── 2025_11_14_023152_create_authors_table.php
-│   │   ├── 2025_11_14_023422_create_books_table.php
-│   │   ├── 2025_11_20_023259_create_categories_table.php
-│   │   └── 2025_11_20_023726_create_book_category_table.php
-│   └── seeders
-│       ├── CategorySeeder.php
-│       └── DatabaseSeeder.php
-│
-└── .gitignore
+# Untuk production
+npm run build
 ```
 
-**Penjelasan:**
-1. `app/Models/Author.php`: Model untuk data penulis.
-2. `app/Models/Book.php`: Model utama untuk entitas buku di Bookly.
-3. `app/Models/Category.php`: Model kategori buku (many-to-many dengan Book).
-4. `app/Models/User.php`: Model user aplikasi (admin, staff, viewer).
-5. `app/Filament/Resources/AuthorResource.php`: Resource Filament untuk mengelola penulis.
-6. `app/Filament/Resources/BookResource.php`: Resource Filament untuk mengelola buku.
-7. `app/Filament/Widgets/BooksChart.php`: Widget chart (statistik buku).
-8. `app/Filament/Widgets/LibraryStatsWidget.php`: Widget statistik ringkas (total buku, penulis, dll).
-9. `app/Policies/BookPolicy.php`: Aturan akses (RBAC) untuk buku.
-10. `app/Policies/AuthorPolicy.php`: Aturan akses untuk penulis.
-11. `database/factories/*.php`: Factory untuk generate data dummy (Author, Book, User).
-12. `database/migrations/*create_authors_table.php`: Skema tabel `authors`.
-13. `database/migrations/*create_books_table.php`: Skema tabe; `books`.
-14. `database/migrations/*create_categories_table.php` & `*create_book_category_table.php`: Skema tabel kategori & pivot.
-15. `database/seeders/CategorySeeder.php`: Seeder data kategori awal.
-16. `database/seeders/DatabaseSeeder.php`: Seeder utama yang memanggil factory & seeder lain.
-    
----
-## ⚙️ Prasyarat & Peralatan
+1. `npm run dev` : Membangun aset _frontend_ untuk **_development_**, termasuk _hot reload_ agar perubahan langsung terlihat di browser.
+2. `npm run build` : Membangun aset _frontend_ untuk **_production_**, biasanya lebih optimal dan sudah terminify.
+   
+### 8. Jalankan Aplikasi
 
-### 1. Pengetahuan yang Diperlukan
+```bash
+# Menggunakan Laravel built-in server
+php artisan serve
+```
 
-Sebelum mengikuti praktikum ini, mahasiswa diharapkan telah memahami hal-hal berikut:
-
-1. Dasar-dasar pemrograman **PHP**, termasuk konsep OOP, penggunaan namespace, dan traits.
-2. Pemahaman mengenai **SQL** serta prinsip dasar _database_ relasional.
-3. Dasar-dasar **HTML** dan **CSS** (pemahaman Tailwind CSS akan menjadi nilai tambah).
-4. Kemampuan menggunakan **_command line_** atau terminal.
-5. Pemahaman konsep **MVC** serta dasar penggunaan _framework_ PHP, khususnya Laravel.
-
-### 2. Perangkat Lunak yang Diperlukan
-
-Aplikasi dan perangkat berikut harus sudah terpasang pada komputer:
-
-1. **PHP** versi 8.1 atau lebih baru.
-2. **Composer** sebagai _dependency_ manager untuk PHP.
-3. **_Database engine_** seperti SQLite, MySQL, atau PostgreSQL.
-4. **Text editor atau IDE**, misalnya Visual Studio Code atau PHPStorm.
-5. **Git** sebagai alat version control.
-6. **Web browser modern** untuk menjalankan dan menguji aplikasi.
+Perintah ini menjalankan **Laravel built-in server** sehingga aplikasi bisa diakses melalui browser. Default URL:`http://127.0.0.1:8000`
 
 ---
-## 🛠️ Langkah Implementasi
+## 💾 Database Aplikasi Cafelora
 
-### 1. Menambahkan Field Description pada Book
+### Entity Relationship Diagram
 
-1. Memodifikasi struktur database dengan menambahkan kolom `description` pada migration tabel `books`.
-2. Menambahkan atribut mass assignment dengan memasukkan `description` ke dalam `$fillable` pada model `Book`.
-3. Mengubah form input Filament pada `BookResource` dengan menambahkan komponen `Textarea` agar user dapat mengisi deskripsi saat membuat dan mengedit buku.
-4. Menambah data dummy deskripsi pada `BookFactory` menggunakan `fake()->paragraph()` untuk mendukung seeding.
-5. Menjalankan ulang migrasi dan seeder dengan perintah `php artisan migrate:fresh --seed`. Tahapan ini membentuk alur lengkap mulai dari database -> model -> form -> factory.
+_Entity Relationship Diagram_ (ERD) ini menggambarkan struktur _database_ dari sistem manajemen Cafelora, yang mencakup pengguna, menu, kategori, varian, topping, transaksi, hingga detail item pesanan.
 
-### 2. Implementasi Role-Based Access Control (RBAC)
+1. User adalah entitas inti yang mewakili admin, staff kasir, dan customer. Akses kontrol diatur menggunakan role dan permission.
+2. Menu terbagi menjadi kategori seperti makanan dan minuman. Menu dapat memiliki banyak varian serta banyak topping.
+3. Transaksi dicatat ketika kasir membuat pesanan. Setiap transaksi memiliki banyak item pesanan. Setiap item dapat memiliki topping tambahan.
+4. Varian dan topping membantu menyesuaikan harga akhir berdasarkan pilihan pelanggan.
+5. Relasi _Many-to-Many_ digunakan pada menu ↔ varian, menu ↔ topping, user ↔ role, serta role ↔ permission.
+6. Transaksi berjalan sesuai alur operasional cafe seperti pemesanan, perhitungan total, pembayaran, hingga pencetakan struk.
 
-1. Menambahkan kolom baru `role` pada tabel `users` lewat migration yang sudah tersedia.
-2. Membuat konfigurasi role di model dengan menambahkan field `role` ke `$fillable` agar dapat diisi oleh seeder.
-3. Membangun tiga akun pengguna (admin, staff, viewer) melalui DatabaseSeeder untuk pengujian hak akses.
-4. Menyusun aturan akses di BookPolicy sesuai ketentuan: Admin memiliki full access, Staff dpaat create/edit/view, dan Viewer hanya view.
-5. Menyembunyikan tombol delete di BookResource agar hanya admin yang dapat menghapus buku.
-6. Menjalankan ulang migrasi + seeder setelah perubahan model & policy `php artisan migrate:fresh --seed`. Tahapan ini memastikan hak akses berjalan sesuai role dan terintegrasi dengan UI Filament.
+<img width="1479" height="1028" alt="Image" src="https://github.com/user-attachments/assets/61072427-f297-4a3a-8c9e-2d04573c1559" />
 
-### 3. Penambahan Widget Dashboard
+---
+### Penjelasan Relasi antar Tabel
 
-1. Membuat widget statistik menggunakan perintah Filament `php artisan make:filament-widget LibraryStatsWidget`. Widget kemudian diisi dengan data total buku, total penulis, serta ringkasan status buku (available/borrowed).
-2. Membuat widget grafik `php artisan make:filament-widget BooksChart --chart`.
-3. Mengonfigurasi data grafik berdasarkan jumlah buku available dan borrowed.
-4. Mendaftarkan widget ke dashboard (otomatis oleh Filament Panel Provider).
+| No | Entitas 1                  | Entitas 2                  | Tipe Relasi    | Penjelasan                                                                |
+|----|----------------------------|----------------------------|----------------|---------------------------------------------------------------------------|
+| 1  | users                      | roles                      | Many-to-Many   | Satu user dapat memiliki banyak role dan sebaliknya.                      |
+| 2  | roles                      | permissions                | Many-to-Many   | Role bisa memiliki banyak permission.                                     |
+| 3  | users                      | permissions                | Many-to-Many   | User bisa diberi permission langsung.                                     |
+| 4  | categories                 | menus                      | One-to-Many    | Satu kategori memiliki banyak menu.                                       |
+| 5  | menus                      | variants                   | Many-to-Many   | Satu menu bisa memiliki banyak varian.                                    |
+| 6  | menus                      | toppings                   | Many-to-Many   | Satu menu bisa memiliki banyak topping.                                   |
+| 7  | users                      | transactions               | One-to-Many    | Satu user (kasir) dapat membuat banyak transaksi.                         |
+| 8  | transactions               | transaction_items          | One-to-Many    | Satu transaksi terdiri dari banyak item pesanan.                          |
+| 9  | menus                      | transaction_items          | Many-to-One    | Satu item pesanan merujuk ke satu menu.                                   |
+| 10 | variants                   | transaction_items          | Many-to-One    | Item pesanan hanya memakai satu varian.                                   |
+| 11 | transaction_items          | transaction_item_toppings  | One-to-Many    | Setiap item pesanan dapat memiliki beberapa topping.                      |
+| 12 | toppings                   | transaction_item_toppings  | Many-to-One    | Topping digunakan sebagai tambahan pada item tertentu.                    |
 
-### 4. Penambahan Fitur Kategori Buku (Many-to-Many)
+---
+### Tabel: users (Tabel Master)
 
-1. Membuat model Category beserta migration tabel `categories`.
-2. Membuat migration tabel pivot `book_category` untuk relasi Many-to-Many.
-3. Menambahkan relasi `belongsToMany()` pada model Book dan Category.
-4. Mengubah form BookResource agar user dapat memilih banyak kategori dengan komponen `Select` berfitur multiple, preload, dan searchable.
-5. Membuat CategorySeeder berisi 20 kategori awal.
-6. Menghubungkan kategori ke buku secara acak pada DatabaseSeeder menggunakan method `attach()`.
-7. Menjalankan ulang migrasi + seeder `php artisan migrate:fresh --seed`.
+Berfungsi untuk menyimpan data user (Admin, Staff).  
+**Relasi:**  
+- One-to-Many → transactions  
+- Many-to-Many → roles  
+- Many-to-Many → permissions  
+
+| Kolom              | Tipe Data      | Fungsi                          |
+|--------------------|----------------|---------------------------------|
+| id                 | bigint         | Primary key user                |
+| name               | varchar        | Nama user                       |
+| email              | varchar        | Email login                     |
+| password           | varchar        | Password bcrypt                 |
+| email_verified_at  | datetime       | Verifikasi email                |
+| remember_token     | varchar        | Token login                     |
+| created_at         | datetime       | Waktu dibuat                    |
+| updated_at         | datetime       | Waktu update                    |
+
+### Tabel: roles (Tabel Master)
+
+Berfungsi untuk menyimpan daftar peran.  
+**Relasi:**  
+- Many-to-Many → permissions  
+- Many-to-Many → users  
+
+| Kolom      | Tipe Data | Fungsi                     |
+|------------|-----------|----------------------------|
+| id         | bigint    | Primary key                |
+| name       | varchar   | Nama role                  |
+| guard_name | varchar   | Guard spatie               |
+| created_at | datetime  | Waktu dibuat               |
+| updated_at | datetime  | Waktu update               |
+
+### Tabel: permissions (Tabel Master)
+
+Berfungsi untuk menyimpan daftar permission.  
+**Relasi:**  
+- Many-to-Many → roles  
+- Many-to-Many → users  
+
+| Kolom      | Tipe Data | Fungsi                     |
+|------------|-----------|----------------------------|
+| id         | bigint    | Primary key                |
+| name       | varchar   | Nama permission            |
+| guard_name | varchar   | Guard permission           |
+| created_at | datetime  | Waktu dibuat               |
+| updated_at | datetime  | Waktu update               |
+
+### Tabel: role_has_permissions (Tabel Relasi Many-to-Many)
+
+Menghubungkan role ↔ permission.  
+**Relasi:**  
+- Many-to-Many → roles  
+- Many-to-Many → permissions  
+
+| Kolom         | Tipe Data | Fungsi                 |
+|---------------|-----------|------------------------|
+| permission_id | bigint    | FK permissions.id      |
+| role_id       | bigint    | FK roles.id            |
+
+### Tabel: model_has_roles (Tabel Relasi Many-to-Many)
+
+Assign role ke user.  
+**Relasi:**  
+- Many-to-Many → users  
+- Many-to-Many → roles  
+
+| Kolom      | Tipe Data | Fungsi                  |
+|------------|-----------|-------------------------|
+| role_id    | bigint    | FK roles.id             |
+| model_type | varchar   | Model type (User)       |
+| model_id   | bigint    | FK users.id             |
+
+### Tabel: model_has_permissions (Tabel Relasi Many-to-Many)
+
+Memberi permission langsung ke user.  
+**Relasi:**  
+- Many-to-Many → users  
+- Many-to-Many → permissions  
+
+| Kolom         | Tipe Data | Fungsi                    |
+|---------------|-----------|---------------------------|
+| permission_id | bigint    | FK permissions.id         |
+| model_type    | varchar   | Model type (User)         |
+| model_id      | bigint    | FK users.id               |
+
+---
+## Menu System
+
+### Tabel: categories (Tabel Master)
+
+Berfungsi untuk menyimpan kategori menu.  
+**Relasi:**  
+- One-to-Many → menus  
+
+| Kolom      | Tipe Data | Fungsi              |
+|------------|-----------|---------------------|
+| id         | int       | Primary key         |
+| name       | varchar   | Nama kategori       |
+| created_at | datetime  | Waktu dibuat        |
+| updated_at | datetime  | Waktu update        |
+
+### Tabel: variants (Tabel Master)
+
+Berfungsi untuk menyimpan varian menu.  
+**Relasi:**  
+- Many-to-Many → menus  
+
+| Kolom            | Tipe Data | Fungsi                          |
+|------------------|-----------|---------------------------------|
+| id               | int       | Primary key                     |
+| name             | varchar   | Nama varian                     |
+| price_adjustment | int       | Tambahan harga                  |
+| created_at       | datetime  | Waktu dibuat                    |
+
+### Tabel: toppings (Tabel Master)
+
+Berfungsi untuk menyimpan topping menu.  
+**Relasi:**  
+- Many-to-Many → menus  
+- Many-to-Many → transaction_items  
+
+| Kolom      | Tipe Data | Fungsi                |
+|------------|-----------|-----------------------|
+| id         | int       | Primary key           |
+| name       | varchar   | Nama topping          |
+| price      | int       | Harga topping         |
+| created_at | datetime  | Waktu dibuat          |
+| updated_at | datetime  | Waktu update          |
+
+
+### Tabel: menus (Tabel Master)
+
+Berfungsi untuk menyimpan menu makanan/minuman.  
+**Relasi:**  
+- One-to-Many ← categories  
+- Many-to-Many → variants  
+- Many-to-Many → toppings  
+- One-to-Many → transaction_items  
+
+| Kolom       | Tipe Data | Fungsi                         |
+|-------------|-----------|--------------------------------|
+| id          | int       | Primary key                    |
+| category_id | int       | FK kategori                    |
+| name        | varchar   | Nama menu                      |
+| description | text      | Deskripsi                      |
+| base_price  | int       | Harga dasar                    |
+| image       | varchar   | Gambar                         |
+| stock       | int       | Stok menu                      |
+| created_at  | datetime  | Waktu dibuat                   |
+| updated_at  | datetime  | Waktu update                   |
+
+### Tabel: menu_variant (Tabel Relasi Many-to-Many)
+
+Relasi menu ↔ varian.  
+**Relasi:**  
+- Many-to-Many → menus  
+- Many-to-Many → variants  
+
+| Kolom     | Tipe Data | Fungsi            |
+|-----------|-----------|-------------------|
+| id        | int       | Primary key       |
+| menu_id   | int       | FK menus.id       |
+| variant_id| int       | FK variants.id    |
+
+### Tabel: menu_topping (Tabel Relasi Many-to-Many)
+
+Relasi menu ↔ topping.  
+**Relasi:**  
+- Many-to-Many → menus  
+- Many-to-Many → toppings  
+
+| Kolom     | Tipe Data | Fungsi              |
+|-----------|-----------|---------------------|
+| id        | int       | Primary key         |
+| menu_id   | int       | FK menus.id         |
+| topping_id| int       | FK toppings.id      |
+
+---
+## Transaction System (POS)
+
+### Tabel: transactions (Tabel Master Transaksi)
+
+Berfungsi untuk menyimpan transaksi kasir.  
+**Relasi:**  
+- Many-to-One → users (kasir)  
+- One-to-Many → transaction_items  
+
+| Kolom         | Tipe Data    | Fungsi                 |
+|---------------|--------------|------------------------|
+| id            | int          | Primary key            |
+| user_id       | bigint       | FK kasir               |
+| invoice       | varchar      | Nomor invoice          |
+| status        | enum         | pending/paid/completed |
+| total         | int          | Total transaksi        |
+| paid_amount   | int          | Uang bayar             |
+| change_amount | int          | Kembalian              |
+| created_at    | datetime     | Waktu dibuat           |
+| updated_at    | datetime     | Waktu update           |
+
+### Tabel: transaction_items (Tabel Detail Transaksi)
+
+Berfungsi untuk menyimpan item dalam transaksi.  
+**Relasi:**  
+- Many-to-One → transactions  
+- Many-to-One → menus  
+- Many-to-One → variants  
+- One-to-Many → transaction_item_toppings  
+
+| Kolom          | Tipe Data | Fungsi                 |
+|----------------|-----------|------------------------|
+| id             | int       | Primary key            |
+| transaction_id | int       | FK transaksi           |
+| menu_id        | int       | FK menu                |
+| variant_id     | int       | FK varian              |
+| quantity       | int       | Jumlah                 |
+| price          | int       | Harga satuan           |
+| subtotal       | int       | Total harga            |
+| created_at     | datetime  | Waktu dibuat           |
+| updated_at     | datetime  | Waktu update           |
+
+### Tabel: transaction_item_toppings (Relasi Many-to-Many per Item Transaksi)
+
+Berfungsi untuk menyimpan topping tambahan pada item transaksi.  
+**Relasi:**  
+- Many-to-One → transaction_items  
+- Many-to-One → toppings  
+
+| Kolom                | Tipe Data | Fungsi                |
+|----------------------|-----------|-----------------------|
+| id                   | int       | Primary key           |
+| transaction_item_id  | int       | FK item transaksi     |
+| topping_id           | int       | FK topping            |
+| price                | int       | Harga topping         |
+
+---
+## 📈 Rekap Uji Fungsionalitas & Status Progres Fitur
+
+Bagian ini digunakan untuk mengetahui fitur apa saja yang **sudah selesai dan sudah diuji** serta fitur yang **masih dalam proses pengembangan**. Pengerjaan dimulai pada tanggal **26 November 2025** sampai saat ini.
+
+### 1. Chaerul Cahyadi (Ketua): Struktur Proyek, Integrasi Transaksi, Dashboard, Review Fitur
+
+| No. | Fitur yang Diuji                  | Deskripsi Uji                                                            | Status                                  | Tanggal Mulai     |
+|-----|-----------------------------------|--------------------------------------------------------------------------|-----------------------------------------|-------------------|
+| 1   | Struktur Proyek & Routing         | Mengecek konsistensi struktur folder, routing utama, dan manajemen modul | ✅ Selesai & Stabil                     | 26 November 2025  |
+| 2   | Integrasi Logika Transaksi (Awal) | Memastikan relasi model transaksi & item berjalan awalnya                | 🔄 Dalam Progres (Bergantung POS Kasir) | 2-8 November 2025 |
+| 3   | Dashboard Admin                   | Visualisasi dasar sudah tampil, grafik belum 100% data real-time         | 🔄 Dalam Progres                        | 2-8 November 2025 |
+| 4   | Review & Validasi Fitur           | Pengecekan keseluruhan fitur anggota lain                                | 🔄 Berjalan Bertahap                    | 26 November 2025  |
+
+### 2. Arya Wicaksana Putra: ERD, CRUD Master Data, Validasi Form, Upload Gambar
+
+| No. | Fitur yang Diuji   | Deskripsi Uji                                                  | Status                       | Tanggal Mulai    |
+|-----|--------------------|----------------------------------------------------------------|------------------------------|------------------|
+| 1   | Desain ERD         | ERD diverifikasi dan konsisten dengan model Laravel            | ✅ Selesai                   | 26 November 2025 |
+| 2   | CRUD Kategori      | Tambah, edit, hapus, dan list kategori berjalan baik           | ✅ Selesai & Berjalan Normal | 26 November 2025 |
+| 3   | CRUD Topping       | Form & relasi topping berhasil disimpan                        | ✅ Selesai                   | 26 November 2025 |
+| 4   | Validasi Form      | Field wajib terisi, format harga, dan input gambar tervalidasi | ✅ Selesai                   | 26 November 2025 |
+| 5   | Upload Gambar Menu | Mengunggah gambar ke storage dan menampilkannya di card menu   | ✅ Selesai                   | 26 November 2025 |
+
+### 3. Aditya Nur Lintang: Setup Laravel, Filament, Role, Policy, User Management
+
+| No. | Fitur yang Diuji                | Deskripsi Uji                                            | Status                 | Tanggal Mulai    |
+|-----|---------------------------------|----------------------------------------------------------|------------------------|------------------|
+| 1   | Setup Laravel & Filament        | Proyek berhasil berjalan dan panel admin siap digunakan  | ✅ Selesai             | 26 November 2025 |
+| 2   | Implementasi Role (Admin/Staff) | Pengujian akses halaman sesuai role                      | ✅ Selesai & Berfungsi | 26 November 2025 |
+| 3   | Policy & Permission             | Staff dibatasi untuk akses tertentu (tanpa delete)       | ✅ Selesai             | 26 November 2025 |
+| 4   | Manajemen User                  | CRUD user admin/staff berjalan optimal                   | ✅ Selesai             | 26 November 2025 |
+
+### 4. Alip Khoeril Akbar: Frontend Pelanggan – Tampilan Menu & Filter
+
+| No. | Fitur yang Diuji    | Deskripsi Uji                      | Status     | Tanggal Mulai    |
+|-----|---------------------|------------------------------------|------------|------------------|
+| 1   | Tampilan Grid Menu  | Card tampil responsif              | ✅ Selesai | 26 November 2025 |
+| 2   | Filter Kategori     | Menu menyesuaikan pilihan kategori | ✅ Selesai | 26 November 2025 |
+| 3   | Filter Varian       | Menu berganti sesuai varian        | ✅ Selesai | 26 November 2025 |
+| 4   | Komponen Card Menu  | Gambar, nama, harga tampil baik    | ✅ Selesai | 26 November 2025 |
+| 5   | Halaman Detail Menu | Informasi menu tampil lengkap      | ✅ Selesai | 26 November 2025 |
+| 6   | Responsivitas UI    | Mobile & desktop tampak konsisten  | ✅ Selesai | 26 November 2025 |
+
+### 5. Muhammad Fauzan: POS Kasir – Repeater Item, Perhitungan, Cetak Struk
+
+| No. | Fitur yang Diuji          | Deskripsi Uji                                     | Status                   | Tanggal Mulai     |
+|-----|---------------------------|---------------------------------------------------|--------------------------|-------------------|
+| 1   | Tampilan Awal POS         | Repeater dasar tampil                             | ✅ UI Dasar Berjalan     | 2-8 November 2025 |
+| 2   | Penambahan Item Transaksi | Penambahan baris item berhasil                    | 🟡 Perlu Logika Tambahan | 2-8 November 2025 |
+| 3   | Dropdown Menu & Varian    | Dropdown tampil, harga belum sepenuhnya otomatis  | 🔄 Dalam Progres         | 2-8 November 2025 |
+| 4   | Kalkulasi Total Otomatis  | Subtotal & total belum final                      | ⏳ Belum Selesai         | 2-8 November 2025 |
+| 5   | Input Bayar & Kembalian   | Field muncul, logika backend belum lengkap        | 🔄 Dalam Progres         | 2-8 November 2025 |
+| 6   | Cetak Struk HTML/PDF      | Template awal ada, belum final                    | 🔄 Dalam Progres         | 2-8 November 2025 |
+
+### 6. Revalina Adelia: Laporan, Export PDF/Excel, Workflow Transaksi, Dokumentasi
+
+| No. | Fitur yang Diuji           | Deskripsi Uji                                        | Status               | Tanggal Mulai     |
+|-----|----------------------------|------------------------------------------------------|----------------------|-------------------|
+| 1   | Halaman Laporan            | Tabel laporan tampil                                 | ✅ UI Dasar Berjalan | 2-8 November 2025 |
+| 2   | Filter Laporan             | Filter tanggal & status belum terhubung backend      | 🔄 Dalam Progres     | 2-8 November 2025 |
+| 3   | Export PDf                 | Tombol tampil, backend belum final                   | 🔄 Dalam Progres     | 2-8 November 2025 |
+| 4   | Workflow Status Transaksi  | Status pending → paid → completed belum terintegrasi | ⏳ Belum Selesai     | 2-8 November 2025 |
+| 5   | Dokumentasi README         | Struktur sudah tersusun dan sedang diisi             | 🔄 Dalam Progres     | 2-8 November 2025 |
+
+---
+## 🗺️ Rencana Pengembangan Berikutnya
+
+Pada tahap pengembangan selanjutnya, fokus utama yang akan dikerjakan adalah:
+
+1. Menyelesaikan logika POS kasir (perhitungan otomatis, kembalian, dan update stok).
+2. Mengintegrasikan workflow status transaksi dengan dashboard dan laporan.
+3. Mengimplementasikan fitur export laporan ke PDF dan Excel.
+4. Menyempurnakan tampilan dashboard dengan grafik penjualan harian dan bulanan.
+5. Melakukan pengujian _end-to-end_ dari sudut pandang Admin, Kasir, dan Pelanggan.
    
 ---
-## 💻 Penjelasan Kode
+# 📸 Hasil Tampilan
 
-### 1. Penambahan Field Description pada Book
+## 1. Halaman Frontend (Pelanggan)
 
-#### a. Migration (Penambahan Kolom Description)
+<img width="504" height="285" alt="Frontend Pelanggan" src="https://github.com/user-attachments/assets/73459cf4-dd58-438b-9254-514062b02287" />
 
-File: `database/migrations/xxxx_create_books_table.php`
+## 2. Halaman Admin
 
-Kode berikut menambahkan kolom description bertipe text yang dapat bernilai null:
+### Halaman Dashboard
 
-`$table->text('description')->nullable();`
+<img width="453" height="254" alt="Dashboard Admin" src="https://github.com/user-attachments/assets/a9b8eb3a-47cc-431e-9dd2-6ad6e2cf6621" />
 
-Kolom ini menjadi penyimpanan utama untuk ringkasan buku. 
+### Halaman Users
 
-#### b. Model (Menambah Description ke `$fillable`)
+<img width="451" height="253" alt="Users" src="https://github.com/user-attachments/assets/20f0b504-8937-44fd-b0db-a0628bd296d5" />
 
-File: `app/Models/Book.php`
+### Halaman Categories
 
-```php
-protected $fillable = [
-    'isbn',
-    'title',
-    'author_id',
-    'publisher',
-    'year',
-    'cover',
-    'status',
-    'description', // Tambah Ini
-];
-```
+<img width="453" height="254" alt="Categories" src="https://github.com/user-attachments/assets/b48dfa33-bb41-47d6-8832-4dae243c95d2" />
 
-Menaruh `description` di `$fillable` memungkinkan Laravel melakukan mass assignment dari form Filament.
+### Halaman Menus
 
-#### c. Resource (Menambahkan Textarea pada Form Book)
+<img width="451" height="253" alt="Menus" src="https://github.com/user-attachments/assets/04786e34-bf23-4367-bc8d-f3fde87574b8" />
 
-File: `app/Filament/Resources/BookResource.php`
+### Halaman Toppings
 
-Kode berikut menambahkan komponen input deskripsi pada form:
+<img width="454" height="254" alt="Toppings" src="https://github.com/user-attachments/assets/33a8e1c8-6869-4a15-a02f-3356f53ca9bc" />
 
-```php
-Forms\Components\Textarea::make('description')
-    ->label('Description')
-    ->rows(4)
-    ->columnSpanFull();
-```
+### Halaman Variants
 
-Textarea ditampilkan dalam section "Book Information" sehingga pengguna dapat menuliskan ringkasan buku secara lengkap.
+<img width="456" height="256" alt="Variants" src="https://github.com/user-attachments/assets/2a598f82-c424-457f-b3e7-1c3a0a638878" />
 
-#### d. Factory (Generate Description Dummy)
+## 3. Halaman Staff
 
-File: `database/factories/BookFactory.php`
+### Halaman Dashboard
 
-`'description' => fake()->paragraph(3, true),`
+<img width="456" height="258" alt="Dashboard Staff" src="https://github.com/user-attachments/assets/8a5e5100-521a-45dd-a603-2447b991ac19" />
 
-Saat melakukan seeding, setiap buku otomatis memiliki deskripsi realistis. Ini juga memenuhi poin "menambah field description pada factory".
+### Halaman Categories
 
-### 2. Implementasi Role-Based Access
+<img width="453" height="254" alt="Categories Staff" src="https://github.com/user-attachments/assets/5df4f0ad-dfc1-4a97-b8dc-aaef87bd8fc3" />
 
-#### a. Migration (Menambah Kolom Role)
+### Halaman Menus
 
-File: `database/migrations/xxxx_create_users_table.php`
+<img width="456" height="258" alt="Menus Staff" src="https://github.com/user-attachments/assets/3d57babe-019e-49b1-b45a-bc61550c947f" />
 
-`$table->enum('role', ['admin', 'staff', 'viewer'])->default('viewer');`
+### Halaman Toppings
 
-Dengan ini, setiap user memiliki role yang menentukan hak akses.
+<img width="454" height="254" alt="Toppings Staff" src="https://github.com/user-attachments/assets/f485a112-f540-4abd-ac75-2adce2dd5208" />
 
-#### b. Model (Menambah Role ke `$fillable`)
+### Halaman Variants
 
-File: `app/Models/User.php`
-
-`protected $fillable = ['name', 'email', 'password', 'role'];`
-
-Agar role bisa diisi saat seeding atau registrasi.
-
-#### c. Seeder (Membuat User Admin, Staff, Viewer)
-
-File: `database/seeders/DatabaseSeeder.php`
-
-```php
-// Admin
-        User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'password' => 'admin',
-            'role' => 'admin',
-            // Kalau mau pasti: 'password' => bcrypt('password'),
-        ]);
-
-        // Staff
-        User::factory()->create([
-            'name' => 'Staff User',
-            'email' => 'staff@example.com',
-            'password' => 'pwstaff',
-            'role' => 'staff',
-        ]);
-
-        // Viewer
-        User::factory()->create([
-            'name' => 'Viewer User',
-            'email' => 'viewer@example.com',
-            'password' => 'pwviewer',
-            'role' => 'viewer',
-        ]);
-```
-
-Tiga akun dibuat untuk pengujian RBAC:
-1. Admin -> akses penuh
-2. Staff -> bisa create, edit, view
-3. Viewer -> hanya bisa view
-
-#### d. Policy (Aturan Akses pada Buku)
-
-File: `app/Policies/BookPolicy.php`
-
-```php
-public function create(User $user): bool {
-    return $user->role !== 'viewer';
-}
-
-public function update(User $user, Book $book): bool {
-    return $user->role !== 'viewer';
-}
-
-public function delete(User $user, Book $book): bool {
-    return $user->role === 'admin';
-}
-```
-
-**Implementasi**
-
-| Role   | View | Create | Update | Delete |
-|--------|------|--------|--------|--------|
-| Admin  | ✔    | ✔     | ✔      | ✔     |
-| Staff  | ✔    | ✔     | ✔      | ✖     |
-| Viewer | ✔    | ✖     | ✖      | ✖     |
-
-#### e. Pembatasan Akses pada Table Actions
-
-File: `BookResource.php -> table()`
-
-```php
-Tables\Actions\DeleteAction::make()
-    ->visible(fn () => auth()->user()?->role == 'admin'),
-```
-
-Tombol delete hanya muncul untuk admin.
-
-### 3. Widget Dashboard
-
-#### a. Widget Statistik
-
-File: `app/Filament/Widgets/LibraryStatsWidget.php`
-
-Menampilkan:
-1. Total Books
-2. Total Authors
-3. Available vs Borrowed
-
-```php
-stat::make('Total Books', Book::count())
-    ->description('Books in the library')
-    ->color('primary');
-```
-
-Widget ini muncul di dashboard Filament dan sesuai dengan instruksi tugas.
-
-#### b. Widget Grafik Pie Chart
-
-File: `app/Filament/Widgets/BooksChart.php`
-
-```php
-$available = Book::where('status', 'available')->count();
-$borrowed = Book::where('status', 'borrowed')->count();
-```
-
-Pie chart menampilkan rasio:
-1. Buku Available
-2. Buku Borrowed
-
-Menggunakan Chart.js bawaan Filament.
-
-### 4. Kategori Buku (Many-to-Many)
-
-#### a. Model Category
-
-File: `app/Models/Category.php`
-
-```php
-public function books() {
-    return $this->belongsToMany(Book::class);
-}
-```
-
-#### b. Relasi pada Book
-
-File: `app/Models/Book.php`
-
-```php
-public function categories() {
-    return $this->belongsToMany(Category::class);
-}
-```
-
-#### c. Migration Category dan Pivot
-
-File : `xxxx_create_categories_table.php` dan `xxxx_create_book_category_table.php`
-
-Kode pivot:
-
-```php
-$table->foreignId('book_id')->constrained()->cascadeOnDelete();
-$table->foreignId('category_id')->constrained()->cascadeOnDelete();
-```
-
-Ini memastikan relasi bersih saat sebuah buku dihapus.
-
-#### d. Form Input Categories di BookResource
-
-File: `BookResource.php -> form()`
-
-```php
-Forms\Components\Select::make('categories')
-    ->multiple()
-    ->relationship('categories', 'name')
-    ->preload()
-    ->searchable();
-```
-
-Pengguna dapat memilih banyak kategori menggunakan dropdown multi-select.
-
-#### 5. Seeder Kategori
-
-File: `CategorySeeder.php`
-
-Berisi 20 kategori bawaan.
-
-Semua kategori otomatis dibuat dan siap dihubungkan ke buku.
-
-#### 6. Seeder Buku (Attach Kategori)
-
-File: `DatabaseSeeder.php`
-
-```php
-$book->categories()->attach(
-    $categories->random(rand(1, 3))->pluck('id')->toArray()
-);
-```
-
-Setiap buku mendapat 1-3 kategori acak.
-
----
-## 📈 Uji Fungsionalitas CRUD
-
-Pengujian ini dilakukan untuk memastikan seluruh fitur CRUD, relasi, upload file, serta kustomisasi pada aplikasi Bookly berjalan sesuai ketentuan dalam Tugas 2: Kustomasisasi & Pengembangan.
-
-| No. | Fitur yang Diuji            | Deskripsi Uji Singkat                                            | Hasil        |
-|-----|-----------------------------|------------------------------------------------------------------|--------------|
-| 1   | Tambah Data Author          | Mengisi form dan menyimpan data penulis baru                     | ✅ Berhasil  |
-| 2   | Edit Data Author            | Mengubah nama penulis melalui halaman edit                       | ✅ Berhasil  |
-| 3   | Hapus Data Author           | Menghapus salah satu data author dari database                   | ✅ Berhasil  |
-| 4   | Tambah Data Buku            | Menambah buku dengan ISBN, penulis, status, dan data pendukung   | ✅ Berhasil  |
-| 5   | Edit Data Buku              | Mengubah informasi judul, tahun terbit, publisher, atau status   | ✅ Berhasil  |
-| 6   | Hapus Data Buku             | Menghapus data buku dari tabel (single delete & bulk delete)     | ✅ Berhasil  |
-| 7   | Upload Cover Buku           | Mengunggah gambar cover melalui FileUpload Filament              | ✅ Berhasil  |
-| 8   | Relasi Penulis -> Buku      | Memastikan dropdown author berfungsi & data tersimpan            | ✅ Berhasil  |
-| 9   | Menambahkan Kategori Buku   | Mengelola kategori & menyimpan hubungan many-to-many             | ✅ Berhasil  |
-| 10  | Filter Buku                 | Menyaring data berdasarkan status, tahun terbit, atau author     | ✅ Berhasil  |
-| 11  | Pencarian Buku              | Mencari berdasarkan judul, ISBN, atau penulis                    | ✅ Berhasil  |
-| 12  | View Detail Buku (Infolist) | Menampilkan detail lengkap buku termasuk cover                   | ✅ Berhasil  |
-| 13  | Role Admin                  | Admin dapat melakukan semua aksi (create/edit/delete)            | ✅ Berhasil  |
-| 14  | Role Staff                  | Staff hanya dapat create, edit, view (tanpa delete)              | ✅ Berhasil  |
-| 15  | Role Viewer                 | Viewer hanya dapat melihat data tanpa akses edit/delete          | ✅ Berhasil  |
-| 16  | Widget Dashboard            | Menampilkan total buku, total author, dan chart status           | ✅ Berhasil  |
-| 17  | Seeder dan Factory          | Generate dummy data (Author, Book, Category) tanpa error         | ✅ Berhasil  |
-| 18  | Validation Input            | Validasi: ISBN unik, field wajib, format tahun                   | ✅ Berhasil  |
-| 19  | Storage Link                | File cover tampil benar pada `storage/book-covers`               | ✅ Berhasil  |
-| 20  | Pivot Category Buku         | Buku dapat memiliki banyak kategori & tampil di tabel            | ✅ Berhasil  |
-
----
-## ⚠️ Troubleshooting
-
-### 1. Error "Class 'App\Models\Book' not found"
-
-Solusi:
-
-```
-composer dump-autoload
-php artisan optimize:clear
-```
-
-### 2. Migration Error "Table already exists"
-
-Solusi:
-
-`php artisan migrate:fresh --seed`
-
-### 3. Filament Page Not Found (404)
-
-Solusi:
-
-```
-php artisan optimize:clear
-php artisan route:clear
-```
-
-### 4. Upload Error "The file could not be uploaded"
-
-Solusi:
-
-```
-
-php artisan storage:link
-# Cek permission folder storage
-chmod -R 775 storage
-```
-
-### 5. Seeder Error "Call to undefined method factory()"
-
-Solusi:
-
-Pastikan model menggunakan trait `HasFactory`:
-
-```
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-class Book extends Model
-{
-    use HasFactory;
-    // ...
-}
-```
-
-### 6. Login Redirect Loop
-
-Solusi:
-
-```
-# Clear semua cache
-php artisan cache:clear
-php artisan config:clear
-php artisan view:clear
-php artisan route:clear
-```
-
----
-## 📸 Hasil Tampilan
-
-### 1. Kolom Description
-
-<img width="1918" height="1079" alt="Kolom Deskripsi Bookly" src="https://github.com/user-attachments/assets/516a10d8-03b6-4dbf-8e8f-dd0aa578aa89" />
-
-### 2. Admin (CRUD)
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/eac56b52-11a1-45d0-abb7-2820cb31ba6a" />
-
-#### Create
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/bb1c902b-ebe0-4ca0-996d-be10add8d1f0" />
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/bceec15a-094d-4127-9241-53f79c2cd333" />
-
-#### Read
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/14a429b5-b182-49e2-8926-51499598cff5" />
-
-#### Update
-
-<img width="1919" height="1079" alt="Edit Buku Admin" src="https://github.com/user-attachments/assets/cb58772b-a316-4ecd-9195-d99328e707db" />
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/02fd287c-e4f9-44ff-bb53-17d1ef1b4959" />
-
-#### Delete
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a39d15bb-8217-4627-a795-737e512b23b7" />
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/874d0f91-0269-4ca7-9e8c-1b36557a7780" />
-
-### 3. Staff (Create, Edit, View)
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/678b67f7-4235-4286-a66e-632cb53b6850" />
-
-#### Create
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6c72e068-3203-444f-a01d-7381a4961e11" />
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/958901c7-e300-424a-bced-d9cb9ddcfddb" />
-
-#### Edit
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/adb7f2c7-667a-4724-a773-daec967fb3c3" />
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d81f85c5-50b8-44ec-b671-07a81d9b07c5" />
-
-#### View
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/df499fa6-aedd-4155-9b03-2db8f806c8a4" />
-
-### 4. Viewer (View)
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1e32d433-7a5f-4645-a58e-5691d0b7c106" />
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7438c91f-5078-4e72-a0a1-7c2b3c9d463d" />
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1cce5123-07ea-4f28-a2e0-2c6e68cecb7f" />
-
-### 5. Widget (Total Books, Total Authors, dan Books Available vs Borrowed (Chart/Stats))
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/dd7c6a19-43bb-4ba2-877c-9af36a6812c8" />
-
-### 6. Model Category & Multiple Select
-
-#### Model Category
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/df7a92c3-5472-45c7-bcf2-2a59ba8dbe5c" />
-
-#### Multiple Select
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/777cd50b-b59e-40ba-879f-2f4436d327d3" />
-
----
-## 🏁 Kesimpulan
-
-Melalui praktikum ini, aplikasi Bookly berhasil dikembangkan sebagai sistem manajemen buku berbasis web yang memanfaatkan Laravel dan Filament 3.x untuk menghadirkan admin panel yang mdoern, rapi, dane efisien. Seluruh tujuan pembelajaran tercapai, mulai dari implementasi CRUD, relasi one-to-many dan many-to-many, upload cover buku, hingga pemakaian Factory & Seeder untuk data dummy. Selain itu, penerapan Role-Based Access Control (RBAC) serta penambahan dashboard widget dan fitur kategori buku menunjukkan bahwa aplikasi tidak hanya berfungsi secara teknis, tetapi juga terstruktur dengan baik dan siap digunakan sebagai fondasi pengembangan sistem perpustakaan yang lebih kompleks di masa depan.
+<img width="454" height="258" alt="Variants Staff" src="https://github.com/user-attachments/assets/a78c759b-000a-4fcc-89a4-ff38ea4f0ade" />
