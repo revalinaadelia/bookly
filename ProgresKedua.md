@@ -254,14 +254,14 @@ Bagian ini digunakan untuk mengetahui fitur apa saja yang *sudah selesai dan sud
 
 ### 5. Muhammad Fauzan: POS Kasir – Repeater Item, Perhitungan, Cetak Struk
 
-| No. | Fitur yang Diuji          | Deskripsi Uji                                     | Status                   | Tanggal Mulai     |
-|-----|---------------------------|---------------------------------------------------|--------------------------|-------------------|
-| 1   | Tampilan Awal POS         | Repeater dasar tampil                             | ✅ UI Dasar Berjalan     | 2-8 November 2025 |
-| 2   | Penambahan Item Transaksi | Penambahan baris item berhasil                    | 🟡 Perlu Logika Tambahan | 2-8 November 2025 |
-| 3   | Dropdown Menu & Varian    | Dropdown tampil, harga belum sepenuhnya otomatis  | 🔄 Dalam Progres         | 2-8 November 2025 |
-| 4   | Kalkulasi Total Otomatis  | Subtotal & total belum final                      | ⏳ Belum Selesai         | 2-8 November 2025 |
-| 5   | Input Bayar & Kembalian   | Field muncul, logika backend belum lengkap        | 🔄 Dalam Progres         | 2-8 November 2025 |
-| 6   | Cetak Struk HTML/PDF      | Template awal ada, belum final                    | 🔄 Dalam Progres         | 2-8 November 2025 |
+| No. | Fitur yang Diuji          | Deskripsi Uji                                     | Status            | Tanggal Mulai    |
+|-----|---------------------------|---------------------------------------------------|-------------------|------------------|
+| 1   | Tampilan Awal POS         | Repeater dasar dan card tampil responsive         | ✅ Selesai       | 2 Desember 2025  |
+| 2   | Penambahan Item Transaksi | Penambahan baris item berhasil dilakukan          | ✅ Selesai       | 5 November 2025  |
+| 3   | Dropdown Menu & Varian    | Dropdown dan harga tampil dengan otomatisasi      | ✅ Selesai       | 8 November 2025  |
+| 4   | Kalkulasi Total Otomatis  | Subtotal dan total keseluruhan item otomatis      | ✅ Selesai       | 10 November 2025 |
+| 5   | Input Bayar & Kembalian   | Field muncul, logika back end lengkap             | ✅ Selesai       | 10 November 2025 |
+| 6   | Cetak Struk HTML/PDF      | Template awal ada, belum final                    | 🔄 Dalam Progres | 12 November 2025 |
 
 ### 6. Revalina Adelia: Laporan, Export PDF/Excel, Workflow Transaksi, Dokumentasi
 
@@ -271,7 +271,7 @@ Bagian ini digunakan untuk mengetahui fitur apa saja yang *sudah selesai dan sud
 | 2   | Filter Laporan             | Filter tanggal & status belum terhubung backend      | 🔄 Dalam Progres     | 8-14 Desember 2025  |
 | 3   | Export PDf/Excel           | Tombol tampil, backend belum final                   | 🔄 Dalam Progres     | 8-14 Desember 2025  |
 | 4   | Workflow Status Transaksi  | Status pending → paid → completed belum terintegrasi | 🔄 Dalam Progres     | 8-14 Desember 2025  |
-| 5   | Dokumentasi README         | Struktur sudah tersusun dan sedang diisi             | 🔄 Dalam Progres     | 8-14 Desember 2025  |
+| 5   | Dokumentasi README         | Struktur sudah tersusun dan sedang diisi             | 🔄 Dalam Progres     | 8-14 November 2025  |
 
 ---
 ## Struktur Folder Sementara
