@@ -351,6 +351,7 @@ CAFELORA/
 
 <img width="456" height="256" alt="Variants" src="https://github.com/user-attachments/assets/28372b5a-2a52-466c-8bdf-c1d42742f1fc" />
 
+---
 ### 2. Sabtu, 29 November 2025 (Halaman Staff)
 
 #### Dashboard Staff
@@ -373,25 +374,44 @@ CAFELORA/
 
 <img width="454" height="258" alt="Variants Staff" src="https://github.com/user-attachments/assets/f854fbee-4dad-4244-9ff5-b8a2f21e70a2" />
 
+---
 ### 3. Minggu, 30 November 2025 (Frontend Menu)
 
 <img width="504" height="285" alt="Frontend Menu" src="https://github.com/user-attachments/assets/9874384d-a01d-4814-bc84-44a1e30dbb90" />
 
+---
 ### 4. Sabtu, 6 Desember 2025 (Frontend Menu)
 
 <img width="602" height="339" alt="Frontend Menu 2" src="https://github.com/user-attachments/assets/5901c06e-68e2-4065-a534-06c17f1d2b9a" />
 
+---
 ### 5. Senin, 8 Desember 2025 (Frontend Menu)
 
 <img width="602" height="339" alt="Frontend Menu 3" src="https://github.com/user-attachments/assets/e0909022-6350-4f00-80d0-7f5d72f94c81" />
 
+---
 ### 6. Rabu, 10 Desember 2025 (POS)
 
-<img width="602" height="376" alt="POS 1" src="https://github.com/user-attachments/assets/4e1bc6ca-be53-4e2b-8e59-a36b48e075c6" />
+<img width="602" height="376" alt="POS" src="https://github.com/user-attachments/assets/89bed448-0665-46d8-a30b-3396eda4fea6" />
 
-### 7. Jum'at, 12 Desember 2025 (POS)
+---
+### 7. Jum'at, 12 Desember 2025 (Transactions)
 
-<img width="602" height="376" alt="POS 2" src="https://github.com/user-attachments/assets/461c0f5f-d486-4f18-b172-9b1843339fe3" />
+<img width="602" height="376" alt="Transactions" src="https://github.com/user-attachments/assets/d1978b80-8eaf-4c41-b7ae-d6fb94258cdb" />
+
+---
+### 8. Jum'at, 12 Desember 2025 (Detail Transactions)
+
+<img width="602" height="376" alt="Detail Transactions" src="https://github.com/user-attachments/assets/5a69020f-1914-4aa2-9c5f-fa89fb86a6f1" />
+
+---
+### 9. Jum'at, 12 Desember 2025 (POS Kasir)
+
+<img width="602" height="376" alt="POS Kasir" src="https://github.com/user-attachments/assets/bee35fc8-20cd-403d-91bb-18614061ed4a" />
+
+<img width="602" height="376" alt="POS Kasir 2" src="https://github.com/user-attachments/assets/04559a49-9d4d-4b95-b9f6-7d5efe55db4b" />
+
+<img width="602" height="376" alt="Keranjang Belanja" src="https://github.com/user-attachments/assets/5c794198-3297-4943-9d66-d1f7ce3de054" />
 
 ---
 ## Teknologi yang Digunakan
