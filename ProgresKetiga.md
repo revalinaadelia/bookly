@@ -545,6 +545,117 @@ Pengembangan dimulai pada *26 November 2025* dan berlangsung secara bertahap hin
 | 5   | Dokumentasi & README      | Dokumentasi lengkap dan siap dipresentasikan | ✅ Selesai | 17 Desember 2025 |
 
 ---
+# Midtrans
+
+## Deskripsi Midtrans
+
+Midtrans adalah layanan payment gateway di Indonesia yang membantu bisnis menerima pembayaran online lewat berbagai metode dalam satu integrasi, seperti transfer bank, virtual account, kartu kredit dan debit, e-wallet, serta pembayaran di minimarket. Kamu bisa menghubungkan Midtrans ke website atau aplikasi lewat API dan dashboard untuk membuat invoice, memproses pembayaran, memantau status transaksi secara real time, dan mengelola fitur seperti notifikasi webhook, pembayaran otomatis, hingga laporan transaksi. Midtrans juga menyediakan fitur keamanan dan deteksi risiko, sehingga alur pembayaran lebih rapi dan mudah dikelola dari sisi sistem.
+
+## Lingkup Pendukung
+
+Website Utama: https://midtrans.com/
+Halaman Dashboard Production: https://dashboard.midtrans.com/l
+Halaman Dashboard Sandbox: https://dashboard.sandbox.midtrans.com/
+Github: https://github.com/Midtrans/midtrans-php
+
+## Alur Kerja Midtrans secara Umum
+
+Alur Midtrans di Cafelora itu sederhana dan rapi. Pelanggan cukup melihat daftar menu di website untuk menentukan pilihan makanan dan minuman, termasuk melihat detail menu agar pesanan lebih jelas. Setelah pelanggan menyampaikan pilihannya, kasir atau admin memasukkan pesanan ke sistem POS, memilih varian, menambahkan topping atau modifier bila diperlukan, lalu sistem otomatis menghitung total belanja. Saat proses checkout, kasir atau admin menekan tombol bayar, kemudian Midtrans menampilkan pilihan metode pembayaran seperti QRIS, e-wallet, transfer bank, kartu, atau minimarket. Pelanggan memilih metode yang paling nyaman, lalu melakukan pembayaran sesuai instruksi yang muncul di layar. Begitu pembayaran berhasil, Midtrans langsung mengirim notifikasi ke sistem Cafelora sehingga status transaksi otomatis berubah menjadi “paid” tanpa input manual. Setelah itu kasir tinggal menyiapkan pesanan, mencetak struk, menghitung kembalian jika ada pembayaran tunai di luar sistem, dan memastikan pesanan berjalan sesuai alur pelayanan. Di sisi admin, semua transaksi tercatat otomatis sehingga mudah dipantau melalui dashboard, bisa di filter berdasarkan tanggal dan status, terlihat pada grafik penjualan, dan bisa diekspor menjadi laporan PDF atau Excel. Jika pembayaran gagal, tertunda, atau dibatalkan, status transaksi ikut terupdate sehingga transaksi tidak dianggap selesai dan data tetap konsisten.
+
+## Alur Kerja Midtrans secara Teknis
+
+### 1. Setup Midtrans
+
+1. Buat akun Midtrans dan pilih environment Sandbox atau Production.
+2. Ambil Server Key dan Client Key.
+3. Simpan key di env aplikasi, contoh MIDTRANS_SERVER_KEY, MIDTRANS_CLIENT_KEY, MIDTRANS_IS_PRODUCTION.
+4. Set konfigurasi: isProduction, isSanitized, is3ds (untuk kartu).
+
+---
+### 2. Desain Data Transaksi di Database
+
+1. Tabel transaksi minimal punya: invoice/order_id, gross_amount, status, payment_type, snap_token, midtrans_transaction_id, paid_at.
+2. Simpan detail item: menu, varian, topping, qty, price, subtotal.
+3. Status internal yang umum: draft, pending, paid, failed, expired, cancelled, refunded.
+
+---
+### 3. Flow Pembuatan Order dari POS
+
+1. Kasir/admin buat order di POS.
+2. Backend hitung ulang total (jangan percaya total dari frontend).
+3. Backend generate order_id unik (misal INV-20251222202546-GCC1).
+4. Simpan transaksi ke DB dengan status pending atau unpaid.
+
+---
+### 4. Request ke Midtrans untuk Generate Pembayaran
+
+1. Backend panggil API Midtrans Snap untuk create transaction.
+2. Kirim payload:
+a. transaction_details: order_id, gross_amount
+b. item_details: list item (menu, topping) dengan price dan qty
+c. customer_details: nama, email, hp (bisa data kasir jika offline)
+d. callbacks atau expiry jika dipakai
+3. Midtrans balikin snap_token dan redirect_url.
+4. Backend simpan snap_token dan redirect_url ke DB.
+
+---
+### 5. Menampilkan UI Pembayaran
+
+1. Frontend POS load Snap.js pakai clientKey.
+2. Saat klik “Bayar”, frontend panggil endpoint backend untuk ambil snap_token.
+3. Frontend menjalankan snap.pay(snapToken, callbacks...) untuk munculin popup pembayaran.
+4. Callback frontend:
+onSuccess, onPending, onError, onClose
+5. Catatan: callback frontend hanya untuk UX. Sumber kebenaran tetap webhook.
+
+---
+### 6. Notifikasi Status via Webhook
+
+1. Midtrans kirim HTTP POST ke endpoint webhook kamu, contoh:
+POST /api/midtrans/notify
+2. Backend verifikasi:
+a. validasi signature key (Midtrans signature)
+b. cocokkan order_id dengan transaksi di DB
+3. Backend mapping status Midtrans:
+a. transaction_status=settlement atau capture -> set paid
+b. pending -> set pending
+c. deny, cancel, expire -> set sesuai
+d. refund / chargeback -> set refunded / chargeback
+4. Update DB secara idempotent:
+a. kalau status sudah paid, jangan overwrite jadi pending
+b. simpan raw payload untuk audit
+5. Trigger proses lanjutan:
+a. set paid_at
+b. kurangi stok
+c. generate nomor struk dan data print
+
+---
+### 7. Status Transaksi Real Time untuk POS
+
+1. POS polling endpoint transaksi atau pakai WebSocket.
+2. Kasir lihat status berubah otomatis jadi paid.
+3. Workflow lanjut: paid -> processing -> done (sesuai alur Cafelora).
+
+---
+### 8. Rekonsiliasi dan Fallback
+
+1. Jika webhook telat, backend bisa cek status via API Midtrans (Status API) berdasarkan order_id.
+2. Jalankan cron job untuk transaksi pending yang lama:
+a. query status ke Midtrans
+b. update DB jika sudah settle atau expire
+
+---
+### 9. Keamanan dan Best Practice
+
+1. Server Key hanya di backend. Jangan taruh di frontend.
+2. Semua total dihitung di backend.
+3. Endpoint webhook harus:
+a. tanpa auth user biasa
+b. diproteksi signature verification
+c. rate limit dan log request
+4. Pastikan order_id unik dan tidak dipakai ulang.
+
+---
 # Hasil Tampilan Aplikasi Cafelora
 
 ## Halaman Admin (Sabtu, 29 November 2025)
@@ -572,6 +683,62 @@ Pengembangan dimulai pada *26 November 2025* dan berlangsung secara bertahap hin
 ### 6. Halaman Variants
 
 <img width="1195" height="669" alt="VariantsAdmin" src="https://github.com/user-attachments/assets/8f960168-41e3-45e7-b5fb-f7382a83ba85" />
+
+### 7. Halaman Admin Login (Senin, 22 Desember 2025)
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/39ceb43d-e265-43f4-9a74-515b1545eef4" />
+
+### 8. Halaman Dashboard Admin (Senin, 22 Desember 2025)
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/230ab124-7553-43de-8b6f-cd7cc618c462" />
+
+### 9. Halaman Users (Senin, 22 Desember 2025)
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/b95ac81f-0dcb-4fe9-a058-c042f7f6766d" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/0b9cc913-f946-402e-8686-e59a47ab1eea" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/93551063-8ac2-4aff-8261-cd055c345fd1" />
+
+### 10. Halaman Categories (Senin, 22 Desember 2025)
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/42581c9c-171b-40d0-9418-090ccadde470" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/53d58490-bc4c-472d-adca-eccb5e1efaa9" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/cfb20564-49dc-451c-a9eb-33058792b83b" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/d00fdf87-aeb8-4475-9b54-cfd9f22b7b00" />
+
+### 11. Halaman Menus (Senin, 22 Desember 2025)
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/991c25ba-3864-4686-8114-a481ccaa5730" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/f73bd51a-57b2-4744-a610-8af84a168eb3" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/ff0434d1-8362-42eb-bb20-0cb8bc68a19a" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/385f0cba-413b-4be1-96d6-bc1d188ddebd" />
+
+### 12. Halaman Toppings (Senin, 22 Desember 2025)
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/b4535159-3e18-405f-acae-09e5f0fc5879" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/170fa002-0e17-4c3d-81be-b14d0f26f1f6" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/d12670a6-dbde-4c61-a68f-327bfc0ad5ae" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/ad47c425-550c-454d-9e06-323228878696" />
+
+### 13. Halaman Variants (Senin, 22 Desember 2025)
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/0e6af486-6b41-4939-9eed-0c184a7ce955" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/3e4f88a8-5d7f-4330-b491-58f87ab2d01b" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/61431e9f-1d87-40ef-9e03-d71096a65bbc" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/443e748e-36af-4e7d-b873-151ca66fa5e0" />
 
 ---
 ## Halaman Staf (Sabtu, 29 November 2025)
@@ -619,6 +786,22 @@ Pengembangan dimulai pada *26 November 2025* dan berlangsung secara bertahap hin
 <img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/b693858f-f241-455b-b66f-cf5b82030f3f" />
 
 <img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/3308f51a-7a17-4a4c-83b6-7a09772f43d7" />
+
+### 10. Halaman Toppings (Senin, 22 Desember 2025)
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/27159a2e-a3c7-4aa6-9173-dc2ee3ccd619" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/fba9a797-f921-4f10-89ef-2a919f137efc" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/336f09ea-deab-4839-bf56-6ab35f9c8bdc" />
+
+### 11. Halaman Variants (Senin, 22 Desember 2025)
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/e7b05351-f0a9-43cc-8225-c7031a0c05f4" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/351c1170-ba8f-4592-8d57-b4cbaa641dd6" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/ddb321b2-c936-4ca8-9954-6a5d93c398d3" />
 
 ---
 ## Halaman Frontend Menu
@@ -684,6 +867,22 @@ Pengembangan dimulai pada *26 November 2025* dan berlangsung secara bertahap hin
 
 <img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/8c3cd5ce-8f82-4b7c-a205-f7a1a1918fa6" />
 
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/5d77cad8-9be1-4e33-b6dd-1afa454c7a03" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/0872256a-0b80-420c-bf3b-5df542a836ca" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/ec2337bb-9182-4068-9be9-9d51a8e51403" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/92f94237-0e4f-439c-b6fe-43cfbf566641" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/31e02e97-2190-44c8-b95a-8d70c7fda880" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/9543ccf5-e890-4bc7-8731-8e5a5bf49d5e" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/c77e2c37-3eed-4eb2-9499-28635b58bb49" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/eed543b6-4943-4b0a-8d2c-efeaae282b81" />
+
 ---
 ### 2. Halaman Transactions 
 
@@ -708,6 +907,21 @@ Pengembangan dimulai pada *26 November 2025* dan berlangsung secara bertahap hin
 <img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/0841cd32-7d02-4faa-a2ad-c434ca90802c" />
 
 <img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/eca6d02a-5334-412f-80d7-c4f7777fde5f" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/bbf58056-5c08-49a9-bc06-398ae0e81c68" />
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/bd8ec9d7-4e66-48c2-8880-f9cdff1b5606" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/58ee1a85-dea8-4188-807b-9afd351fb052" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/da4a96cd-609c-424a-9553-f1e90bae0024" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/f117939a-3cd6-49da-87d5-1af19afc8ed2" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/03235692-12c7-48a3-a8d4-5e988e3f84ba" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/a346c130-65aa-494c-9b7c-86225042734e" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/7a1821f4-be71-43e9-bd35-baa297267fa0" />
 
 ---
 ### 3. Halaman Detail Transactions (Rabu, 10 Desember 2025)
