@@ -401,6 +401,10 @@ Perintah ini digunakan untuk menjalankan *Laravel built-in server*. Setelah serv
 | 19. | Muhammad Fauzan    | Responsive POS Kasir, BestSeller Menu, dan fitur struk          | Menambahkan Fitur Responsive pada Halaman POS, BestSeller serta Struk untuk Otomatisasi Print                                                                      | 13/12/2025        |
 | 20. | Chaerul Cahyadi    | Metode Pembayaran                                               | Implementasi Payment Gateway Midtrans                                                                                     | 17/12/2025        |
 | 21. | Revalina Adelia    | Dokumentasi                                                     | Menambahkan Pendahuluan dan Tampilan, Update Fitur + Instalasi + Agenda | 17/12/2025 |
+| 22. | Chaerul Cahyadi    | Edit Tampilan                                                   | Update Nama Pelanggan to Nama Casier                                    | 17/12/2025 |
+| 23. | Chaerul Cahyadi    | Widget Dashboard                                                | Add Widget Dashboard                                                    | 22/12/2025 |
+| 24. | Chaerul Cahyadi    | Button Completed                                                | Add Completed Button                                                    | 22/12/2025 |
+| 25. | Chaerul Cahyadi    | Transactions Policy                                             | Add Transactions Policy                                                 | 22/12/2025 |
 
 ---
 # Agenda Presentasi Progres Tugas Besar
