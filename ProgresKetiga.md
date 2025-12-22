@@ -820,8 +820,6 @@ c. rate limit dan log request
 
 <img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/705710f3-78e4-4f1b-bb2f-ff591c95dc31" />
 
-<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/b693858f-f241-455b-b66f-cf5b82030f3f" />
-
 <img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/3308f51a-7a17-4a4c-83b6-7a09772f43d7" />
 
 ### 10. Halaman Toppings (Senin, 22 Desember 2025)
