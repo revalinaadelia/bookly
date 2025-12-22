@@ -522,7 +522,7 @@ Pengembangan dimulai pada *26 November 2025* dan berlangsung secara bertahap hin
 |-----|-------------------|--------------------------------------|------------------|------------------|
 | 1   | Halaman Laporan   | Data laporan transaksi ditampilkan   | 🔄 Dalam Progres | 17 Desember 2025 |
 | 2   | Filter Laporan    | Filter tanggal & status dikembangkan | 🔄 Dalam Progres | 17 Desember 2025 |
-| 3   | Export PDf/Excel  | Fitur ekspor laporan dikembangkan    | 🔄 Dalam Progres | 17 Desember 2025 |
+| 3   | Export PDF/Excel  | Fitur ekspor laporan dikembangkan    | 🔄 Dalam Progres | 17 Desember 2025 |
 
 ---
 ## Tahap 4 - Finalisasi & Validasi Akhir (Rabu, 17 Desember 2025 - Selasa, 23 Desember 2025)
@@ -540,7 +540,7 @@ Pengembangan dimulai pada *26 November 2025* dan berlangsung secara bertahap hin
 |-----|---------------------------|----------------------------------------------|------------|------------------|
 | 1   | Halaman Laporan           | Tabel laporan tervalidasi                    | ✅ Selesai | 17 Desember 2025 |
 | 2   | Filter Laporan            | Filter berfungsi sesuai kebutuhan            | ✅ Selesai | 17 Desember 2025 |
-| 3   | Export PDf/Excel          | Laporan dapat diekspor dengan benar          | ✅ Selesai | 17 Desember 2025 |
+| 3   | Export PDF/Excel          | Laporan dapat diekspor dengan benar          | ✅ Selesai | 17 Desember 2025 |
 | 4   | Workflow Status Transaksi | Status transaksi terintegrasi penuh          | ✅ Selesai | 17 Desember 2025 |
 | 5   | Dokumentasi & README      | Dokumentasi lengkap dan siap dipresentasikan | ✅ Selesai | 17 Desember 2025 |
 
