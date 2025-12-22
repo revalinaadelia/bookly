@@ -400,25 +400,25 @@ Perintah ini digunakan untuk menjalankan *Laravel built-in server*. Setelah serv
 | 18. | Alip Khoeril Akbar | Membuat Section Rekomendasi Menu (BestSeller) dan Fix Responsif | Membuat Section Rekomendasi Menu (BestSeller) dan Fix Responsif                                                                                    | 13/12/2025        |
 | 19. | Muhammad Fauzan    | Responsive POS Kasir, BestSeller Menu, dan fitur struk          | Menambahkan Fitur Responsive pada Halaman POS, BestSeller serta Struk untuk Otomatisasi Print                                                                      | 13/12/2025        |
 | 20. | Chaerul Cahyadi    | Metode Pembayaran                                               | Implementasi Payment Gateway Midtrans                                                                                     | 17/12/2025        |
-| 21. | Revalina Adelia    | Dokumentasi                                                     | Menambahkan Pendahuluan dan Tampilan, Update Fitur + Instalasi + Agenda
-                                                                                             | 17/12/2025        |
+| 21. | Revalina Adelia    | Dokumentasi                                                     | Menambahkan Pendahuluan dan Tampilan, Update Fitur + Instalasi + Agenda | 17/12/2025 |
 
 ---
 # Agenda Presentasi Progres Tugas Besar
 
-| No. | Hari/Tanggal           | Presentasi ke-             | Hasil Progres                                                     |
-|-----|------------------------|----------------------------|-------------------------------------------------------------------|
-| 1.  | Rabu, 10 Desember 2025 | Presentasi Progres Pertama | Master Menu, Dashboard Filament, GitHub dan Branch sudah Berjalan |
-| 2.  | Rabu, 17 Desember 2025 | Presentasi Progres Kedua   |                                                                   |
+| No. | Hari/Tanggal           | Presentasi ke-             | Hasil Progres                                                                                                       |
+|-----|------------------------|----------------------------|---------------------------------------------------------------------------------------------------------------------|
+| 1.  | Rabu, 10 Desember 2025 | Presentasi Progres Pertama | Master Menu, Dashboard Filament, GitHub dan Branch sudah Berjalan                                                   |
+| 2.  | Rabu, 17 Desember 2025 | Presentasi Progres Kedua   | Role dan Policy, CRUD (User, Menu, Category, Variant), Tampilan Frontend, POS Kasir, Integrasi Payment Gateway, dan Dokumentasi |
 
 ---
 # Bukti Dokumentasi Presentasi
 
 ## 1. Rabu, 10 Desember 2025 (Progres Pertama)
 
-![alt text](images/PresentasiProgresPertama.png)
+<img width="1919" height="1079" alt="PresentasiProgresPertama" src="https://github.com/user-attachments/assets/61457389-3ae4-40cd-88c9-5de514c35383" />
 
 ## 2. Rabu, 17 Desember 2025 (Progres Kedua)
+<img width="1365" height="767" alt="PresentasiProgresKedua" src="https://github.com/user-attachments/assets/e3343e38-3d15-4c76-be62-4524444257eb" />
 
 ---
 # Rekap Uji Fungsionalitas & Status Progres Pengembangan Fitur
@@ -551,71 +551,99 @@ Pengembangan dimulai pada *26 November 2025* dan berlangsung secara bertahap hin
 
 ### 1. Halaman Dashboard Admin
 
-![alt text](images/DashboardAdmin.png)
+<img width="1178" height="660" alt="DashboardAdmin" src="https://github.com/user-attachments/assets/2c824ddd-6163-44d7-8701-e77328341ca7" />
 
 ### 2. Halaman Users
 
-![alt text](images/UsersAdmin.png)
+<img width="1179" height="658" alt="UsersAdmin" src="https://github.com/user-attachments/assets/e873ec37-ca7e-4f48-83cb-b488b8dadae0" />
 
 ### 3. Halaman Categories
 
-![alt text](images/CategoriesAdmin.png)
+<img width="1185" height="668" alt="CategoriesAdmin" src="https://github.com/user-attachments/assets/b5ff2891-4a69-4205-b710-41cedda81c55" />
 
 ### 4. Halaman Menus
 
-![alt text](images/MenusAdmin.png)
+<img width="1183" height="660" alt="MenusAdmin" src="https://github.com/user-attachments/assets/388a1209-dfbf-4e7c-8c7c-4502aa3c7f64" />
 
 ### 5. Halaman Toppings
 
-![alt text](images/ToppingsAdmin.png)
+<img width="1191" height="668" alt="ToppingsAdmin" src="https://github.com/user-attachments/assets/c59e2670-e346-418e-b7cb-b35471b6e35e" />
 
 ### 6. Halaman Variants
 
-![alt text](images/VariantsAdmin.png)
+<img width="1195" height="669" alt="VariantsAdmin" src="https://github.com/user-attachments/assets/8f960168-41e3-45e7-b5fb-f7382a83ba85" />
 
 ---
 ## Halaman Staf (Sabtu, 29 November 2025)
 
 ### 1. Halaman Dashboard Staf
 
-![alt text](images/DashboardStaf.png)
+<img width="1195" height="671" alt="DashboardStaf" src="https://github.com/user-attachments/assets/3268bdb1-0eac-4d35-a93a-577e60f5d845" />
 
 ### 2. Halaman Categories
 
-![alt text](images/CategoriesStaf.png)
+<img width="1182" height="664" alt="CategoriesStaf" src="https://github.com/user-attachments/assets/ce82d8d1-96b8-40f5-8b0c-844bcdb45311" />
 
 ### 3. Halaman Menus
 
-![alt text](images/MenusStaf.png)
+<img width="1193" height="668" alt="MenusStaf" src="https://github.com/user-attachments/assets/26f5956b-0b83-4423-a778-666502c1f6a6" />
 
 ### 4. Halaman Toppings
 
-![alt text](images/ToppingsStaf.png)
+<img width="1193" height="666" alt="ToppingsStaf" src="https://github.com/user-attachments/assets/423844cf-556a-4506-95b5-bee5df5c8c0a" />
 
 ### 5. Halaman Variants
 
-![alt text](images/VariantsStaf.png)
+<img width="1194" height="669" alt="VariantsStaf" src="https://github.com/user-attachments/assets/8d8c4e89-f46c-4007-88c5-c1f831f2b6a8" />
+
+### 6. Halaman Staf Login (Senin, 22 Desember 2025)
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/39ceb43d-e265-43f4-9a74-515b1545eef4" />
+
+### 7. Halaman Dashboard Staf (Senin, 22 Desember 2025)
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/7f65f93d-c0d8-4c4f-a69f-0560bb0ea9ad" />
+
+### 8. Halaman Categories (Senin, 22 Desember 2025)
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/1df85c4d-927b-4508-ba12-69552d0bce3d" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/6dcbe68c-80de-4710-83f4-376931972d75" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/39b42851-66ab-4812-a9a4-af4ea16590ae" />
+
+### 9. Halaman Menus (Senin, 22 Desember 2025)
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/705710f3-78e4-4f1b-bb2f-ff591c95dc31" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/b693858f-f241-455b-b66f-cf5b82030f3f" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/3308f51a-7a17-4a4c-83b6-7a09772f43d7" />
 
 ---
 ## Halaman Frontend Menu
 
 ### 1. Minggu, 30 November 2025
 
-![alt text](images/FrontendMenu.png)
+<img width="504" height="285" alt="FrontendMenu" src="https://github.com/user-attachments/assets/b342da7b-8046-47f3-99bc-3aec5a5e26a3" />
 
 ### 2. Sabtu, 6 Desember 2025
 
-![alt text](images/FrontendMenu2.png)
+<img width="601" height="339" alt="FrontendMenu2" src="https://github.com/user-attachments/assets/5407770b-344e-4948-acf9-f05829e0a6bc" />
 
 ### 3. Senin, 8 Desember 2025
 
-![alt text](images/FrontendMenu3.png)
+<img width="601" height="339" alt="FrontendMenu3" src="https://github.com/user-attachments/assets/045a6530-1f13-480b-a795-46c2a2d241f8" />
 
 ### 4. Sabtu, 13 Desember 2025
 
-![alt text](images/FrontendMenu4.png)
+<img width="601" height="339" alt="FrontendMenu4" src="https://github.com/user-attachments/assets/27900b88-bbcd-4f7d-92c6-ee447e5a249d" />
 
-![alt text](images/FrontendMenu5.png)
+<img width="601" height="339" alt="FrontendMenu5" src="https://github.com/user-attachments/assets/ad703878-2a74-45cb-8bbf-e1a1678ef3a1" />
+
+### 5. Senin, 22 Desember 2025
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/add47c86-98af-413d-b6b5-4f1fbbd78db1" />
 
 ---
 ## Halaman POS dan Transaksi
@@ -624,36 +652,66 @@ Pengembangan dimulai pada *26 November 2025* dan berlangsung secara bertahap hin
 
 #### 1. Rabu, 10 Desember 2025
 
-![alt text](images/POSKasir1.png)
+<img width="602" height="376" alt="POSKasir1" src="https://github.com/user-attachments/assets/ab126370-11de-407c-a475-c5cba12b2e48" />
 
 #### 2. Jum'at, 12 Desember 2025
 
-![alt text](images/POSKasir2.png)
+<img width="602" height="376" alt="POSKasir2" src="https://github.com/user-attachments/assets/77e39087-cf88-446c-94b5-03babb78d38a" />
 
-![alt text](images/POSKasir3.png)
+<img width="602" height="376" alt="POSKasir3" src="https://github.com/user-attachments/assets/53dd2d12-700b-40ee-af9b-e650b6c05149" />
 
-![alt text](images/KeranjangBelanja.png)
+<img width="602" height="376" alt="KeranjangBelanja" src="https://github.com/user-attachments/assets/cd568563-1145-4741-8277-4a810c3cafce" />
 
 #### 3. Sabtu, 13 Desember 2025
 
-![alt text](images/POSTerbaru.png)
+<img width="601" height="376" alt="POSTerbaru" src="https://github.com/user-attachments/assets/3c445698-9b95-4a30-9c9b-e5725dc578a1" />
 
-![alt text](images/TransaksiBerhasil.png)
+<img width="601" height="376" alt="TransaksiBerhasil" src="https://github.com/user-attachments/assets/e68fdd03-c3b5-47ad-9950-a6f15484c298" />
+
+#### 4. Senin, 22 Desember 2025
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/9820f87e-d994-4ebf-82ac-67282b435548" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/3b21d4d8-d211-4d26-8665-8d12df509f13" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/9f2925d9-f49d-4413-b6a4-642bbd3de5ba" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/e11b3e6e-5d46-4954-9af0-c1e0defa4170" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/e834b95c-479d-4555-bd74-4ba9571fef44" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/f5f1b7ad-f00f-4d0a-9ebc-d3898ca42939" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/8c3cd5ce-8f82-4b7c-a205-f7a1a1918fa6" />
 
 ---
 ### 2. Halaman Transactions 
 
 #### 1. Rabu, 10 Desember 2025
 
-![alt text](images/Transactions.png)
+<img width="602" height="376" alt="Transactions" src="https://github.com/user-attachments/assets/5a0c85a9-c85b-4d91-a676-ed7d37f29308" />
 
 #### 2. Sabtu, 13 Desember 2025
 
-![alt text](images/Transactions2.png)
+<img width="601" height="376" alt="Transactions2" src="https://github.com/user-attachments/assets/3c1f8fdd-a1e0-4f8f-880d-a7adf27999cb" />
+
+#### 3. Senin, 22 Desember 2025
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/e0c77264-2d23-4f52-93a4-97f45fca245c" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/4e11904b-e8d9-4a6a-9054-70f10da67776" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/f6134dc7-dba3-442e-aa84-d22813c6e9c7" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/8290f872-8484-4894-a7c4-abbd02b8da77" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/0841cd32-7d02-4faa-a2ad-c434ca90802c" />
+
+<img width="1470" height="924" alt="Image" src="https://github.com/user-attachments/assets/eca6d02a-5334-412f-80d7-c4f7777fde5f" />
 
 ---
 ### 3. Halaman Detail Transactions (Rabu, 10 Desember 2025)
 
-![alt text](images/DetailTransactions.png)
+<img width="602" height="376" alt="DetailTransactions" src="https://github.com/user-attachments/assets/d2e0c157-8997-4db0-8cdf-0080a72fb52c" />
 
 ---
