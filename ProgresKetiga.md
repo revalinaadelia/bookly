@@ -273,7 +273,7 @@ Digunakan sebagai sistem manajemen basis data untuk menyimpan seluruh data aplik
 
 Aplikasi dapat dijalankan menggunakan web server seperti Apache atau Nginx, maupun menggunakan Laravel built-in server untuk kebutuhan development.
 
-Untuk pengguna sistem operasi Windows, disarankan menggunakan salah satu tools beriktu:
+Untuk pengguna sistem operasi Windows, disarankan menggunakan salah satu tools berikut:
 1. *Laragon*, karena menyediakan PHP, MySQL, dan Apache dalam satu paket sehingga memudahkan proses setup.
 2. *XAMPP*, sebagai alternatif server lokal yang umum digunakan.
 3. *Herd*, sebagai alternatif yang lebih ringan untuk pengembangan Laravel secara lokal.
