@@ -58,7 +58,7 @@ Sebagai upaya untuk mengatasi permasalahan tersebut, aplikasi *Cafelora* menawar
 
 Cafelora merupakan sistem yang dirancang untuk mendukung operasional kafe modern melalui sistem pemesanan, transaksi, dan pengelolaan data yang terintegrasi. Sistem ini dibuat untuk membantu kafe dalam menyajikan informasi menu secara jelas, memproses pesanan dengan lebih terstruktur, serta mempercepat alur transaksi secara efisien. 
 
-Dalam penerapannya, Cafelora menyediakan antarmuka pelanggan yang informatif untuk memudahkan pemilihan menu, serta antarmuka kasir yang sederhana namun sistematis guna menimalkan kesalahan dalam proses pemesanan dan pembayaran. Pendekatan digital yang diterapkan memungkinkan alur pelayanan kafe menjadi lebih tertata, meningkatkan efisiensi kerja staf, serta membantu pengelola dalam memantau dan mengelola aktivitas oeprasional secara lebih efektif.
+Dalam penerapannya, Cafelora menyediakan antarmuka pelanggan yang informatif untuk memudahkan pemilihan menu, serta antarmuka kasir yang sederhana namun sistematis guna meminimalkan kesalahan dalam proses pemesanan dan pembayaran. Pendekatan digital yang diterapkan memungkinkan alur pelayanan kafe menjadi lebih tertata, meningkatkan efisiensi kerja staf, serta membantu pengelola dalam memantau dan mengelola aktivitas oeprasional secara lebih efektif.
 
 Sebagai solusi berbasis aplikasi, Cafelora berperan dalam mendukung peningkatan kualitas layanan dan kelancaran operasional kafe secara keseluruhan melalui sistem yang praktis, terstruktur, dan mudah digunakan.
 
